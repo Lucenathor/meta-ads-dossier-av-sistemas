@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dossier de Inteligencia Publicitaria — Servicios audiovisuales / Eventos corporativos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #111118;
+      --bg-card: #16161f;
+      --bg-card-hover: #1c1c28;
+      --border: #2a2a3a;
+      --border-glow: #3b82f620;
+      --text-primary: #f0f0f5;
+      --text-secondary: #9898b0;
+      --text-muted: #5a5a75;
+      --accent: #3b82f6;
+      --accent-dim: #3b82f640;
+      --accent-glow: #3b82f630;
+      --green: #22c55e;
+      --green-dim: #22c55e30;
+      --orange: #f97316;
+      --orange-dim: #f9731630;
+      --red: #ef4444;
+      --red-dim: #ef444430;
+      --purple: #a855f7;
+      --purple-dim: #a855f730;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ─── Hero Section ─── */
+    .hero {
+      position: relative;
+      padding: 80px 24px 60px;
+      text-align: center;
+      overflow: hidden;
+      background: linear-gradient(180deg, #0d0d1a 0%, var(--bg-primary) 100%);
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 20%, var(--accent-dim) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 80%, var(--purple-dim) 0%, transparent 50%);
+      animation: hero-glow 8s ease-in-out infinite alternate;
+    }
+    @keyframes hero-glow {
+      0% { opacity: 0.3; transform: scale(1); }
+      100% { opacity: 0.6; transform: scale(1.1); }
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: var(--accent-dim);
+      border: 1px solid var(--accent);
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 24px;
+    }
+    .hero-badge::before { content: '🔍'; }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .hero-stat {
+      text-align: center;
+    }
+    .hero-stat-value {
+      font-size: 2.5rem;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent);
+    }
+    .hero-stat-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* ─── Container ─── */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ─── Section ─── */
+    .section {
+      padding: 60px 0;
+    }
+    .section-header {
+      margin-bottom: 40px;
+    }
+    .section-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+    }
+
+    /* ─── Executive Summary ─── */
+    .summary-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .summary-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--purple), var(--accent));
+    }
+    .summary-text {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--text-secondary);
+    }
+
+    /* ─── Competitor Section ─── */
+    .competitor-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 32px;
+      transition: border-color 0.3s;
+    }
+    .competitor-section:hover {
+      border-color: var(--accent-dim);
+    }
+    .competitor-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .competitor-rank {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: var(--accent-dim);
+      border: 1px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    .competitor-info h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .competitor-stats {
+      display: flex;
+      gap: 16px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .competitor-stats span::before {
+      content: '•';
+      margin-right: 6px;
+      color: var(--accent);
+    }
+
+    /* ─── Ad Cards ─── */
+    .ads-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 16px;
+    }
+    .ad-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .ad-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent-dim);
+    }
+    .ad-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      background: var(--bg-primary);
+      border-bottom: 1px solid var(--border);
+      font-size: 0.8rem;
+    }
+    .ad-format {
+      padding: 3px 10px;
+      border-radius: 6px;
+      background: var(--purple-dim);
+      color: var(--purple);
+      font-weight: 600;
+      font-size: 0.75rem;
+    }
+    .ad-days {
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+    }
+    .ad-score {
+      margin-left: auto;
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.75rem;
+    }
+    .score-high { background: var(--green-dim); color: var(--green); }
+    .score-medium { background: var(--orange-dim); color: var(--orange); }
+    .score-low { background: var(--red-dim); color: var(--red); }
+    .ad-body {
+      padding: 16px;
+    }
+    .ad-headline {
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+      font-style: italic;
+    }
+    .ad-copy {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 12px;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .ad-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+    .ad-cta-badge {
+      padding: 3px 10px;
+      border-radius: 6px;
+      background: var(--accent-dim);
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .platform-badge {
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: var(--bg-card);
+      color: var(--text-muted);
+      font-size: 0.7rem;
+      border: 1px solid var(--border);
+    }
+    .ad-landing-link, .ad-library-link {
+      font-size: 0.8rem;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+    .ad-landing-link:hover, .ad-library-link:hover { opacity: 0.7; }
+    .ad-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 16px;
+      border-top: 1px solid var(--border);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* ─── Patterns ─── */
+    .patterns-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .pattern-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .pattern-card.full-width {
+      grid-column: 1 / -1;
+    }
+    .pattern-card h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--text-primary);
+    }
+    .pattern-card ol, .pattern-card ul {
+      padding-left: 20px;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+    .pattern-card li {
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+    .format-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .format-label {
+      width: 80px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      flex-shrink: 0;
+    }
+    .format-track {
+      flex: 1;
+      height: 8px;
+      background: var(--bg-primary);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .format-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--purple));
+      border-radius: 4px;
+      transition: width 1s ease;
+    }
+    .format-pct {
+      width: 40px;
+      text-align: right;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* ─── Recommendations ─── */
+    .rec-card {
+      display: flex;
+      gap: 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 16px;
+      transition: border-color 0.3s;
+    }
+    .rec-card:hover {
+      border-color: var(--green);
+    }
+    .rec-number {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--green-dim);
+      border: 1px solid var(--green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--green);
+      flex-shrink: 0;
+    }
+    .rec-content h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .rec-details {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+      font-size: 0.85rem;
+    }
+    .rec-hook, .rec-format, .rec-cta {
+      padding: 4px 12px;
+      border-radius: 6px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+    .rec-content p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ─── URLs List ─── */
+    .urls-list {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .urls-list ol {
+      padding-left: 24px;
+    }
+    .urls-list li {
+      margin-bottom: 8px;
+      font-size: 0.85rem;
+    }
+    .urls-list a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .urls-list a:hover {
+      text-decoration: underline;
+    }
+
+    /* ─── Footer ─── */
+    .footer {
+      text-align: center;
+      padding: 40px 24px;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+    .footer-brand {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 768px) {
+      .hero { padding: 60px 16px 40px; }
+      .hero-stats { gap: 24px; }
+      .ads-grid { grid-template-columns: 1fr; }
+      .patterns-grid { grid-template-columns: 1fr; }
+      .competitor-header { flex-direction: column; align-items: flex-start; }
+      .rec-card { flex-direction: column; }
+      .section { padding: 40px 0; }
+    }
+
+    /* ─── Print ─── */
+    @media print {
+      body { background: white; color: #111; }
+      .hero::before { display: none; }
+      .ad-card, .competitor-section, .pattern-card, .rec-card, .summary-card, .urls-list {
+        background: #f9f9f9;
+        border-color: #ddd;
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">Dossier de Inteligencia Publicitaria</div>
+      <h1>SERVICIOS AUDIOVISUALES / EVENTOS CORPORATIVOS</h1>
+      <p class="hero-subtitle">Análisis de competencia en Meta Ad Library — España — 2026-03-22</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-value">5</div>
+          <div class="hero-stat-label">Competidores</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">10</div>
+          <div class="hero-stat-label">Anuncios analizados</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Executive Summary -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Resumen Ejecutivo</div>
+        <h2 class="section-title">Panorama publicitario</h2>
+      </div>
+      <div class="summary-card">
+        <p class="summary-text">El sector de servicios audiovisuales en España muestra baja saturación publicitaria en Meta Ads, con solo ~22 anuncios activos directamente relacionados. Los competidores más rentables (SytelMedia con 8 meses activo, SRFLYER con casi 1 año) apuestan por vídeo y carruseles con hooks emocionales. La mayoría de empresas del sector NO se anuncian en Meta, lo que representa una oportunidad enorme para AV Sistemas de posicionarse como líder digital con una inversión moderada.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Competitors -->
+  <section class="section" style="background: var(--bg-secondary);">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Análisis de Competidores</div>
+        <h2 class="section-title">Top 5 competidores del sector</h2>
+      </div>
+      
+        <div class="competitor-section">
+          <div class="competitor-header">
+            <div class="competitor-rank">#1</div>
+            <div class="competitor-info">
+              <h3>SytelMedia</h3>
+              <div class="competitor-stats">
+                <span>2 anuncios encontrados</span>
+                <span>Más antiguo: 240 días</span>
+              </div>
+            </div>
+          </div>
+          <div class="ads-grid">
+            
+            <div class="ad-card">
+              <div class="ad-header">
+                <div class="ad-format">Vídeo</div>
+                <div class="ad-days">240 días activo</div>
+                <div class="ad-score score-medium">Muy Alta</div>
+              </div>
+              <div class="ad-body">
+                <div class="ad-headline">"No hay segunda oportunidad para una primera impresión"</div>
+                <p class="ad-copy">¿Tu marca se ve como una más o como LA que todos recuerdan? En un mundo lleno de contenido mediocre, destacar no es una opción... es una obligación. Somos la empresa de marketing audiovisual que convierte tu negocio en una marca imposible de ignorar. Grabamos. Editamos. Creamos ideas que impactan. Y lo hacemos con estrategia, no con suerte. Escríbenos y demos el primer paso hacia tu nueva imagen de marca. Transformamos tu presencia digital en una máquina de atracción visual.</p>
+                <div class="ad-meta">
+                  <div class="ad-cta-badge">CTA: Learn more</div>
+                  <div class="ad-platforms"><span class="platform-badge">Facebook</span><span class="platform-badge">Instagram</span></div>
+                </div>
+                <a href="https://sytelmedia.com" target="_blank" class="ad-landing-link">Ver landing page →</a>
+              </div>
+              <div class="ad-footer">
+                <span>Inicio: 2025-07-26</span>
+                <a href="https://www.facebook.com/ads/library/?id=1321958259657305" target="_blank" class="ad-library-link">Ver en Meta Ad Library →</a>
+              </div>
+            </div>
+            
+            <div class="ad-card">
+              <div class="ad-header">
+                <div class="ad-format">Vídeo</div>
+                <div class="ad-days">192 días activo</div>
+                <div class="ad-score score-high">Alta</div>
+              </div>
+              <div class="ad-body">
+                <div class="ad-headline">"¿Tu marca se ve como una más o como LA que todos recuerdan?"</div>
+                <p class="ad-copy">Si tu marca no impacta en 3 segundos, perdiste el cliente. En un mundo lleno de contenido mediocre, destacar no es una opción... es una obligación. Somos la empresa de marketing audiovisual que convierte tu negocio en una marca imposible de ignorar.</p>
+                <div class="ad-meta">
+                  <div class="ad-cta-badge">CTA: Get quote</div>
+                  <div class="ad-platforms"><span class="platform-badge">Facebook</span><span class="platform-badge">Instagram</span><span class="platform-badge">Audience Network</span></div>
+                </div>
+                <a href="https://fb.me/sytelmedia" target="_blank" class="ad-landing-link">Ver landing page →</a>
+              </div>
+              <div class="ad-footer">
+                <span>Inicio: 2025-09-12</span>
+                <a href="https://www.facebook.com/ads/library/?id=1121123423288673" target="_blank" class="ad-library-link">Ver en Meta Ad Library →</a>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+        
+
+        <div class="competitor-section">
+          <div class="competitor-header">
+            <div class="competitor-rank">#2</div>
+            <div class="competitor-info">
+              <h3>TJ Light Producciones</h3>
+              <div class="competitor-stats">
+                <span>1 anuncios encontrados</span>
+                <span>Más antiguo: 4 días</span>
+              </div>
+            </div>
+          </div>
+          <div class="ads-grid">
+            
+            <div class="ad-card">
+              <div class="ad-header">
+                <div class="ad-format">Vídeo</div>
+                <div class="ad-days">4 días activo</div>
+                <div class="ad-score score-medium">Media</div>
+              </div>
+              <div class="ad-body">
+                <div class="ad-headline">"Un buen show no solo se escucha… se vive"</div>
+                <p class="ad-copy">En TJLight Producciones sabemos que un buen show no solo se escucha… se vive. Por eso trabajamos para que cada concierto, gira o evento tenga el sonido y la iluminación que realmente merece el escenario. Equipos profesionales, diseño técnico personalizado y un equipo que conoce el directo desde dentro. Producción técnica para conciertos y giras. Iluminación escénica que potencia cada momento del show. Sonido potente, limpio y perfectamente equilibrado. Soluciones técnicas para eventos corporativos. Alquiler de material profesional con asistencia técnica.</p>
+                <div class="ad-meta">
+                  <div class="ad-cta-badge">CTA: Call now</div>
+                  <div class="ad-platforms"><span class="platform-badge">Facebook</span><span class="platform-badge">Instagram</span></div>
+                </div>
+                <a href="https://www.tjlight.es" target="_blank" class="ad-landing-link">Ver landing page →</a>
+              </div>
+              <div class="ad-footer">
+                <span>Inicio: 2026-03-18</span>
+                <a href="https://www.facebook.com/ads/library/?id=2361245974376339" target="_blank" class="ad-library-link">Ver en Meta Ad Library →</a>
+              </div>
+            </div>
+            
+            <div class="ad-card">
+              <div class="ad-header">
+                <div class="ad-format">Vídeo</div>
+                <div class="ad-days">4 días activo</div>
+                <div class="ad-score score-medium">Media</div>
+              </div>
+              <div class="ad-body">
+                <div class="ad-headline">"Tú te encargas de la música. Nosotros de que todo suene y se vea como debe."</div>
+                <p class="ad-copy">Producción técnica para conciertos y giras. Iluminación escénica que potencia cada momento del show. Sonido potente, limpio y perfectamente equilibrado. Soluciones técnicas para eventos corporativos. Alquiler de material profesional con asistencia técnica.</p>
+                <div class="ad-meta">
+                  <div class="ad-cta-badge">CTA: Call now</div>
+                  <div class="ad-platforms"><span class="platform-badge">Facebook</span><span class="platform-badge">Instagram</span></div>
+                </div>
+                <a href="https://www.tjlight.es" target="_blank" class="ad-landing-link">Ver landing page →</a>
+              </div>
+              <div class="ad-footer">
+                <span>Inicio: 2026-03-18</span>
+                <a href="https://www.facebook.com/ads/library/?id=2361245974376339" target="_blank" class="ad-library-link">Ver en Meta Ad Library →</a>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+        
+
+        <div class="competitor-section">
+          <div class="competitor-header">
+            <div class="competitor-rank">#3</div>
+            <div class="competitor-info">
+              <h3>Magic Music Management Espectáculos</h3>
+              <div class="competitor-stats">
+                <span>1 anuncios encontrados</span>
+                <span>Más antiguo: 131 días</span>
+              </div>
+            </div>
+          </div>
+          <div class="ads-grid">
+            
+            <div class="ad-card">
+              <div class="ad-header">
+                <div class="ad-format">Imagen (carrusel)</div>
+                <div class="ad-days">131 días activo</div>
+                <div class="ad-score score-high">Alta</div>
+              </div>
+              <div class="ad-body">
+                <div class="ad-headline">"MAGIC MUSIC MANAGEMENT"</div>
+                <p class="ad-copy">Sonido, iluminación y espectáculo profesional. Creamos experiencias únicas para conciertos, fiestas y eventos en toda España. Equipos de sonido e iluminación de alto nivel. DJs y discomóviles. Producción técnica completa. Orquestas y grupos para fiestas populares. Hacemos que cada evento sea inolvidable.</p>
+                <div class="ad-meta">
+                  <div class="ad-cta-badge">CTA: Visit Instagram profile</div>
+                  <div class="ad-platforms"><span class="platform-badge">Instagram</span></div>
+                </div>
+                <a href="https://www.magicmusicmanagement.es" target="_blank" class="ad-landing-link">Ver landing page →</a>
+              </div>
+              <div class="ad-footer">
+                <span>Inicio: 2025-11-12</span>
+                <a href="https://www.facebook.com/ads/library/?id=1738214963508728" target="_blank" class="ad-library-link">Ver en Meta Ad Library →</a>
+              </div>
+            </div>
+            
+            <div class="ad-card">
+              <div class="ad-header">
+                <div class="ad-format">Imagen</div>
+                <div class="ad-days">131 días activo</div>
+                <div class="ad-score score-medium">Media-Alta</div>
+              </div>
+              <div class="ad-body">
+                <div class="ad-headline">"Hacemos que cada evento sea inolvidable"</div>
+                <p class="ad-copy">Equipos de sonido e iluminación de alto nivel. DJs y discomóviles. Producción técnica completa. Orquestas y grupos para fiestas populares. Contacta y da vida a tu fiesta.</p>
+                <div class="ad-meta">
+                  <div class="ad-cta-badge">CTA: Visit Instagram profile</div>
+                  <div class="ad-platforms"><span class="platform-badge">Instagram</span></div>
+                </div>
+                <a href="https://www.instagram.com/magicmusicmanagement" target="_blank" class="ad-landing-link">Ver landing page →</a>
+              </div>
+              <div class="ad-footer">
+                <span>Inicio: 2025-11-12</span>
+                <a href="https://www.facebook.com/ads/library/?id=1738214963508728" target="_blank" class="ad-library-link">Ver en Meta Ad Library →</a>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+        
+
+        <div class="competitor-section">
+          <div class="competitor-header">
+            <div class="competitor-rank">#4</div>
+            <div class="competitor-info">
+              <h3>EventSoundMontes</h3>
+              <div class="competitor-stats">
+                <span>1 anuncios encontrados</span>
+                <span>Más antiguo: 3 días</span>
+              </div>
+            </div>
+          </div>
+          <div class="ads-grid">
+            
+            <div class="ad-card">
+              <div class="ad-header">
+                <div class="ad-format">Imagen</div>
+                <div class="ad-days">3 días activo</div>
+                <div class="ad-score score-medium">Media-Baja</div>
+              </div>
+              <div class="ad-body">
+                <div class="ad-headline">"Producción técnica y experiencia audiovisual para eventos"</div>
+                <p class="ad-copy">En EventSoundMontes ofrecemos servicios profesionales de producción técnica, sonido e iluminación, diseñados para crear experiencias únicas y cuidar cada detalle de tu evento. Nos encargamos de la planificación técnica, logística, montaje y operación. Sistemas de sonido profesional de alta calidad. Servicio de DJ para eventos. Iluminación decorativa y efectos especiales. Alquiler de equipos y soporte técnico para DJs. Logística, transporte, montaje y desmontaje. Efectos especiales: Pistola CO2 Megatron, Cañón de confeti profesional de CO2, Chispa fría, Efectos de fuego real para espectáculos impactantes.</p>
+                <div class="ad-meta">
+                  <div class="ad-cta-badge">CTA: Visit Instagram profile</div>
+                  <div class="ad-platforms"><span class="platform-badge">Instagram</span></div>
+                </div>
+                <a href="https://www.instagram.com/eventsoundmontes" target="_blank" class="ad-landing-link">Ver landing page →</a>
+              </div>
+              <div class="ad-footer">
+                <span>Inicio: 2026-03-19</span>
+                <a href="https://www.facebook.com/ads/library/?id=916508221301430" target="_blank" class="ad-library-link">Ver en Meta Ad Library →</a>
+              </div>
+            </div>
+            
+            <div class="ad-card">
+              <div class="ad-header">
+                <div class="ad-format">Imagen</div>
+                <div class="ad-days">3 días activo</div>
+                <div class="ad-score score-low">Baja</div>
+              </div>
+              <div class="ad-body">
+                <div class="ad-headline">"Tecnología, elegancia y espectáculo para eventos inolvidables"</div>
+                <p class="ad-copy">Ideal para bodas, eventos corporativos, celebraciones privadas y producciones exclusivas. Reserva tu fecha con antelación. Contáctanos por mensaje directo para más información.</p>
+                <div class="ad-meta">
+                  <div class="ad-cta-badge">CTA: Visit Instagram profile</div>
+                  <div class="ad-platforms"><span class="platform-badge">Instagram</span></div>
+                </div>
+                <a href="https://www.instagram.com/eventsoundmontes" target="_blank" class="ad-landing-link">Ver landing page →</a>
+              </div>
+              <div class="ad-footer">
+                <span>Inicio: 2026-03-19</span>
+                <a href="https://www.facebook.com/ads/library/?id=916508221301430" target="_blank" class="ad-library-link">Ver en Meta Ad Library →</a>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+        
+
+        <div class="competitor-section">
+          <div class="competitor-header">
+            <div class="competitor-rank">#5</div>
+            <div class="competitor-info">
+              <h3>SRFLYER.COM</h3>
+              <div class="competitor-stats">
+                <span>1 anuncios encontrados</span>
+                <span>Más antiguo: 362 días</span>
+              </div>
+            </div>
+          </div>
+          <div class="ads-grid">
+            
+            <div class="ad-card">
+              <div class="ad-header">
+                <div class="ad-format">Carrusel</div>
+                <div class="ad-days">362 días activo</div>
+                <div class="ad-score score-medium">Muy Alta</div>
+              </div>
+              <div class="ad-body">
+                <div class="ad-headline">"¡Haz que tu evento sea LEGENDARIO con SRFlyer!"</div>
+                <p class="ad-copy">¿Estás listo para llevar tu evento al siguiente nivel? En SRFlyer nos especializamos en crear experiencias únicas, ¡porque tu evento merece ser el más épico de todos! Lo que nos diferencia: Personalización 100% a tu estilo. Creatividad sin límites. Detalles que marcan la diferencia. ¿Quieres que tu evento sea el centro de todas las miradas?</p>
+                <div class="ad-meta">
+                  <div class="ad-cta-badge">CTA: Watch More</div>
+                  <div class="ad-platforms"><span class="platform-badge">Facebook</span><span class="platform-badge">Instagram</span></div>
+                </div>
+                <a href="https://srflyer.com" target="_blank" class="ad-landing-link">Ver landing page →</a>
+              </div>
+              <div class="ad-footer">
+                <span>Inicio: 2025-03-25</span>
+                <a href="https://www.facebook.com/ads/library/?id=1178088493859471" target="_blank" class="ad-library-link">Ver en Meta Ad Library →</a>
+              </div>
+            </div>
+            
+            <div class="ad-card">
+              <div class="ad-header">
+                <div class="ad-format">Carrusel</div>
+                <div class="ad-days">362 días activo</div>
+                <div class="ad-score score-high">Alta</div>
+              </div>
+              <div class="ad-body">
+                <div class="ad-headline">"Marco Photocall personalizable / Pulseras TYVEK / Vasos personalizables / Lanyards"</div>
+                <p class="ad-copy">Desde bodas alucinantes hasta eventos corporativos que rompen esquemas, tenemos todo lo que necesitas para hacerlo inolvidable. Personalización 100% a tu estilo. Creatividad sin límites. Detalles que marcan la diferencia.</p>
+                <div class="ad-meta">
+                  <div class="ad-cta-badge">CTA: Watch More</div>
+                  <div class="ad-platforms"><span class="platform-badge">Facebook</span><span class="platform-badge">Instagram</span></div>
+                </div>
+                <a href="https://srflyer.com" target="_blank" class="ad-landing-link">Ver landing page →</a>
+              </div>
+              <div class="ad-footer">
+                <span>Inicio: 2025-03-25</span>
+                <a href="https://www.facebook.com/ads/library/?id=1178088493859471" target="_blank" class="ad-library-link">Ver en Meta Ad Library →</a>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+        
+    </div>
+  </section>
+
+  <!-- Patterns -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Inteligencia</div>
+        <h2 class="section-title">Patrones detectados</h2>
+      </div>
+      
+    <div class="patterns-grid">
+      <div class="pattern-card">
+        <h4>🎯 Hooks que funcionan</h4>
+        <ol><li>No hay segunda oportunidad para una primera impresión</li><li>Si tu marca no impacta en 3 segundos, perdiste el cliente</li><li>Un buen show no solo se escucha… se vive</li><li>¡Haz que tu evento sea LEGENDARIO!</li><li>Creamos experiencias únicas</li></ol>
+      </div>
+      <div class="pattern-card">
+        <h4>📊 Formatos dominantes</h4>
+        
+        <div class="format-bar">
+          <div class="format-label">Vídeo</div>
+          <div class="format-track">
+            <div class="format-fill" style="width: 50%"></div>
+          </div>
+          <div class="format-pct">50%</div>
+        </div>
+        
+        <div class="format-bar">
+          <div class="format-label">Imagen</div>
+          <div class="format-track">
+            <div class="format-fill" style="width: 30%"></div>
+          </div>
+          <div class="format-pct">30%</div>
+        </div>
+        
+        <div class="format-bar">
+          <div class="format-label">Carrusel</div>
+          <div class="format-track">
+            <div class="format-fill" style="width: 20%"></div>
+          </div>
+          <div class="format-pct">20%</div>
+        </div>
+        
+      </div>
+      <div class="pattern-card">
+        <h4>🔘 CTAs más usados</h4>
+        <ol><li>Learn more</li><li>Visit Instagram profile</li><li>Call now</li><li>Get quote</li><li>Watch More</li></ol>
+      </div>
+      <div class="pattern-card">
+        <h4>✍️ Patrones de copy</h4>
+        <ol><li>Pregunta retórica + dolor + solución: '¿Tu marca se ve como una más? → Nosotros la hacemos imposible de ignorar'</li><li>Lista de servicios con emojis: Sonido, iluminación, DJs, producción técnica</li><li>Urgencia emocional: 'No hay segunda oportunidad', 'En 3 segundos perdiste el cliente'</li><li>Diferenciación por experiencia: 'No solo grabamos, pensamos en ventas'</li><li>Copy energético con mayúsculas: 'LEGENDARIO', 'ÉPICO', 'INOLVIDABLE'</li></ol>
+      </div>
+      <div class="pattern-card full-width">
+        <h4>⚠️ Debilidades de la competencia</h4>
+        <ul><li>Ningún competidor usa testimonios de clientes reales ni casos de éxito con métricas en sus anuncios</li><li>La mayoría dirige tráfico a Instagram en lugar de a una landing page optimizada para conversión</li><li>Ninguno muestra antes/después de sus montajes ni timelapses de instalación en los anuncios</li><li>Los copies son genéricos y no segmentan por tipo de cliente (corporativo vs. bodas vs. conciertos)</li><li>Solo SytelMedia y SRFLYER tienen anuncios de larga duración; el resto son novatos sin datos de optimización</li></ul>
+      </div>
+    </div>
+    
+    </div>
+  </section>
+
+  <!-- Recommendations -->
+  <section class="section" style="background: var(--bg-secondary);">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Estrategia</div>
+        <h2 class="section-title">Recomendaciones para superar a la competencia</h2>
+      </div>
+      
+        <div class="rec-card">
+          <div class="rec-number">1</div>
+          <div class="rec-content">
+            <h4>Anuncio Timelapse: De Almacén Vacío a Evento Épico</h4>
+            <div class="rec-details">
+              <div class="rec-hook"><strong>Hook:</strong> "60 horas de montaje en 60 segundos. Esto es lo que hacemos en AV Sistemas."</div>
+              <div class="rec-format"><strong>Formato:</strong> Vídeo (Reel 15-30 seg)</div>
+              <div class="rec-cta"><strong>CTA:</strong> Solicitar presupuesto</div>
+            </div>
+            <p>Ningún competidor muestra el proceso de montaje. Un timelapse del almacén vacío transformándose en un evento completo es visualmente impactante y demuestra capacidad técnica sin necesidad de palabras. Dirigir a landing page con formulario de presupuesto.</p>
+          </div>
+        </div>
+        
+
+        <div class="rec-card">
+          <div class="rec-number">2</div>
+          <div class="rec-content">
+            <h4>Anuncio Testimonial: El Director de Eventos que Repite</h4>
+            <div class="rec-details">
+              <div class="rec-hook"><strong>Hook:</strong> "Llevamos 3 años confiando en AV Sistemas para nuestros eventos corporativos. ¿Por qué? Porque nunca fallan."</div>
+              <div class="rec-format"><strong>Formato:</strong> Vídeo (testimonial 30-45 seg)</div>
+              <div class="rec-cta"><strong>CTA:</strong> Ver casos de éxito</div>
+            </div>
+            <p>Ningún competidor usa testimoniales reales. Un vídeo corto de un cliente corporativo explicando por qué repite con AV Sistemas genera confianza inmediata. Es el formato más difícil de copiar porque requiere clientes reales satisfechos.</p>
+          </div>
+        </div>
+        
+
+        <div class="rec-card">
+          <div class="rec-number">3</div>
+          <div class="rec-content">
+            <h4>Anuncio Carrusel: Antes/Después de 5 Eventos Reales</h4>
+            <div class="rec-details">
+              <div class="rec-hook"><strong>Hook:</strong> "Sala vacía → Evento de 500 personas. Swipe para ver la transformación."</div>
+              <div class="rec-format"><strong>Formato:</strong> Carrusel (5 slides)</div>
+              <div class="rec-cta"><strong>CTA:</strong> Pedir presupuesto sin compromiso</div>
+            </div>
+            <p>El formato antes/después es uno de los más efectivos en Meta Ads. Cada slide muestra un evento diferente (corporativo, boda, concierto, feria, presentación de producto) para demostrar versatilidad. SRFLYER lleva 1 año con carrusel, lo que valida el formato.</p>
+          </div>
+        </div>
+        
+    </div>
+  </section>
+
+  <!-- All URLs -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Referencias</div>
+        <h2 class="section-title">URLs de todos los anuncios analizados</h2>
+      </div>
+      <div class="urls-list">
+        <ol>
+          <li><a href="https://www.facebook.com/ads/library/?id=1321958259657305" target="_blank">SytelMedia — No hay segunda oportunidad para una primera impresión</a></li>
+<li><a href="https://www.facebook.com/ads/library/?id=1121123423288673" target="_blank">SytelMedia — ¿Tu marca se ve como una más o como LA que todos recuerdan?</a></li>
+<li><a href="https://www.facebook.com/ads/library/?id=2361245974376339" target="_blank">TJ Light Producciones — Un buen show no solo se escucha… se vive</a></li>
+<li><a href="https://www.facebook.com/ads/library/?id=2361245974376339" target="_blank">TJ Light Producciones — Tú te encargas de la música. Nosotros de que todo suene y se</a></li>
+<li><a href="https://www.facebook.com/ads/library/?id=1738214963508728" target="_blank">Magic Music Management Espectáculos — MAGIC MUSIC MANAGEMENT</a></li>
+<li><a href="https://www.facebook.com/ads/library/?id=1738214963508728" target="_blank">Magic Music Management Espectáculos — Hacemos que cada evento sea inolvidable</a></li>
+<li><a href="https://www.facebook.com/ads/library/?id=916508221301430" target="_blank">EventSoundMontes — Producción técnica y experiencia audiovisual para eventos</a></li>
+<li><a href="https://www.facebook.com/ads/library/?id=916508221301430" target="_blank">EventSoundMontes — Tecnología, elegancia y espectáculo para eventos inolvidable</a></li>
+<li><a href="https://www.facebook.com/ads/library/?id=1178088493859471" target="_blank">SRFLYER.COM — ¡Haz que tu evento sea LEGENDARIO con SRFlyer!</a></li>
+<li><a href="https://www.facebook.com/ads/library/?id=1178088493859471" target="_blank">SRFLYER.COM — Marco Photocall personalizable / Pulseras TYVEK / Vasos pers</a></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>Generado por <span class="footer-brand">Meta Ads Spy</span> — Skill de OpenClaw</p>
+    <p style="margin-top: 4px;">2026 — Datos extraídos de Meta Ad Library</p>
+  </footer>
+</body>
+</html>
