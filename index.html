@@ -1,986 +1,722 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dossier de Inteligencia Publicitaria — Servicios audiovisuales / Eventos corporativos</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg-primary: #0a0a0f;
-      --bg-secondary: #111118;
-      --bg-card: #16161f;
-      --bg-card-hover: #1c1c28;
-      --border: #2a2a3a;
-      --border-glow: #3b82f620;
-      --text-primary: #f0f0f5;
-      --text-secondary: #9898b0;
-      --text-muted: #5a5a75;
-      --accent: #3b82f6;
-      --accent-dim: #3b82f640;
-      --accent-glow: #3b82f630;
-      --green: #22c55e;
-      --green-dim: #22c55e30;
-      --orange: #f97316;
-      --orange-dim: #f9731630;
-      --red: #ef4444;
-      --red-dim: #ef444430;
-      --purple: #a855f7;
-      --purple-dim: #a855f730;
-    }
-
-    body {
-      font-family: 'Inter', -apple-system, sans-serif;
-      background: var(--bg-primary);
-      color: var(--text-primary);
-      line-height: 1.6;
-      min-height: 100vh;
-    }
-
-    /* ─── Hero Section ─── */
-    .hero {
-      position: relative;
-      padding: 80px 24px 60px;
-      text-align: center;
-      overflow: hidden;
-      background: linear-gradient(180deg, #0d0d1a 0%, var(--bg-primary) 100%);
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle at 30% 20%, var(--accent-dim) 0%, transparent 50%),
-                  radial-gradient(circle at 70% 80%, var(--purple-dim) 0%, transparent 50%);
-      animation: hero-glow 8s ease-in-out infinite alternate;
-    }
-    @keyframes hero-glow {
-      0% { opacity: 0.3; transform: scale(1); }
-      100% { opacity: 0.6; transform: scale(1.1); }
-    }
-    .hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 16px;
-      background: var(--accent-dim);
-      border: 1px solid var(--accent);
-      border-radius: 100px;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-bottom: 24px;
-    }
-    .hero-badge::before { content: '🔍'; }
-    .hero h1 {
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      font-weight: 900;
-      line-height: 1.1;
-      margin-bottom: 16px;
-      background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .hero-subtitle {
-      font-size: 1.1rem;
-      color: var(--text-secondary);
-      margin-bottom: 32px;
-    }
-    .hero-stats {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      flex-wrap: wrap;
-    }
-    .hero-stat {
-      text-align: center;
-    }
-    .hero-stat-value {
-      font-size: 2.5rem;
-      font-weight: 800;
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--accent);
-    }
-    .hero-stat-label {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    /* ─── Container ─── */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* ─── Section ─── */
-    .section {
-      padding: 60px 0;
-    }
-    .section-header {
-      margin-bottom: 40px;
-    }
-    .section-label {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 8px;
-    }
-    .section-title {
-      font-size: 1.8rem;
-      font-weight: 800;
-    }
-
-    /* ─── Executive Summary ─── */
-    .summary-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 32px;
-      position: relative;
-      overflow: hidden;
-    }
-    .summary-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--accent), var(--purple), var(--accent));
-    }
-    .summary-text {
-      font-size: 1.1rem;
-      line-height: 1.8;
-      color: var(--text-secondary);
-    }
-
-    /* ─── Competitor Section ─── */
-    .competitor-section {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 32px;
-      margin-bottom: 32px;
-      transition: border-color 0.3s;
-    }
-    .competitor-section:hover {
-      border-color: var(--accent-dim);
-    }
-    .competitor-header {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      margin-bottom: 24px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid var(--border);
-    }
-    .competitor-rank {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      background: var(--accent-dim);
-      border: 1px solid var(--accent);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      font-weight: 800;
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--accent);
-      flex-shrink: 0;
-    }
-    .competitor-info h3 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-    .competitor-stats {
-      display: flex;
-      gap: 16px;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-    .competitor-stats span::before {
-      content: '•';
-      margin-right: 6px;
-      color: var(--accent);
-    }
-
-    /* ─── Ad Cards ─── */
-    .ads-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-      gap: 16px;
-    }
-    .ad-card {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      transition: transform 0.2s, border-color 0.2s;
-    }
-    .ad-card:hover {
-      transform: translateY(-2px);
-      border-color: var(--accent-dim);
-    }
-    .ad-header {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 16px;
-      background: var(--bg-primary);
-      border-bottom: 1px solid var(--border);
-      font-size: 0.8rem;
-    }
-    .ad-format {
-      padding: 3px 10px;
-      border-radius: 6px;
-      background: var(--purple-dim);
-      color: var(--purple);
-      font-weight: 600;
-      font-size: 0.75rem;
-    }
-    .ad-days {
-      color: var(--text-muted);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
-    }
-    .ad-score {
-      margin-left: auto;
-      padding: 3px 10px;
-      border-radius: 6px;
-      font-weight: 700;
-      font-size: 0.75rem;
-    }
-    .score-high { background: var(--green-dim); color: var(--green); }
-    .score-medium { background: var(--orange-dim); color: var(--orange); }
-    .score-low { background: var(--red-dim); color: var(--red); }
-    .ad-body {
-      padding: 16px;
-    }
-    .ad-headline {
-      font-weight: 700;
-      font-size: 0.95rem;
-      margin-bottom: 8px;
-      color: var(--text-primary);
-      font-style: italic;
-    }
-    .ad-copy {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: 12px;
-      display: -webkit-box;
-      -webkit-line-clamp: 4;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-    .ad-meta {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 8px;
-    }
-    .ad-cta-badge {
-      padding: 3px 10px;
-      border-radius: 6px;
-      background: var(--accent-dim);
-      color: var(--accent);
-      font-size: 0.75rem;
-      font-weight: 600;
-    }
-    .platform-badge {
-      padding: 2px 8px;
-      border-radius: 4px;
-      background: var(--bg-card);
-      color: var(--text-muted);
-      font-size: 0.7rem;
-      border: 1px solid var(--border);
-    }
-    .ad-landing-link, .ad-library-link {
-      font-size: 0.8rem;
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 500;
-      transition: opacity 0.2s;
-    }
-    .ad-landing-link:hover, .ad-library-link:hover { opacity: 0.7; }
-    .ad-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 16px;
-      border-top: 1px solid var(--border);
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
-
-    /* ─── Patterns ─── */
-    .patterns-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
-    }
-    .pattern-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px;
-    }
-    .pattern-card.full-width {
-      grid-column: 1 / -1;
-    }
-    .pattern-card h4 {
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 16px;
-      color: var(--text-primary);
-    }
-    .pattern-card ol, .pattern-card ul {
-      padding-left: 20px;
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-    }
-    .pattern-card li {
-      margin-bottom: 8px;
-      line-height: 1.5;
-    }
-    .format-bar {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-    .format-label {
-      width: 80px;
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      flex-shrink: 0;
-    }
-    .format-track {
-      flex: 1;
-      height: 8px;
-      background: var(--bg-primary);
-      border-radius: 4px;
-      overflow: hidden;
-    }
-    .format-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--accent), var(--purple));
-      border-radius: 4px;
-      transition: width 1s ease;
-    }
-    .format-pct {
-      width: 40px;
-      text-align: right;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
-      color: var(--accent);
-      font-weight: 600;
-    }
-
-    /* ─── Recommendations ─── */
-    .rec-card {
-      display: flex;
-      gap: 20px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px;
-      margin-bottom: 16px;
-      transition: border-color 0.3s;
-    }
-    .rec-card:hover {
-      border-color: var(--green);
-    }
-    .rec-number {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      background: var(--green-dim);
-      border: 1px solid var(--green);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--green);
-      flex-shrink: 0;
-    }
-    .rec-content h4 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-    .rec-details {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin-bottom: 12px;
-      font-size: 0.85rem;
-    }
-    .rec-hook, .rec-format, .rec-cta {
-      padding: 4px 12px;
-      border-radius: 6px;
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      color: var(--text-secondary);
-    }
-    .rec-content p {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    /* ─── URLs List ─── */
-    .urls-list {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px;
-    }
-    .urls-list ol {
-      padding-left: 24px;
-    }
-    .urls-list li {
-      margin-bottom: 8px;
-      font-size: 0.85rem;
-    }
-    .urls-list a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-    .urls-list a:hover {
-      text-decoration: underline;
-    }
-
-    /* ─── Footer ─── */
-    .footer {
-      text-align: center;
-      padding: 40px 24px;
-      border-top: 1px solid var(--border);
-      color: var(--text-muted);
-      font-size: 0.8rem;
-    }
-    .footer-brand {
-      font-weight: 700;
-      color: var(--accent);
-    }
-
-    /* ─── Responsive ─── */
-    @media (max-width: 768px) {
-      .hero { padding: 60px 16px 40px; }
-      .hero-stats { gap: 24px; }
-      .ads-grid { grid-template-columns: 1fr; }
-      .patterns-grid { grid-template-columns: 1fr; }
-      .competitor-header { flex-direction: column; align-items: flex-start; }
-      .rec-card { flex-direction: column; }
-      .section { padding: 40px 0; }
-    }
-
-    /* ─── Print ─── */
-    @media print {
-      body { background: white; color: #111; }
-      .hero::before { display: none; }
-      .ad-card, .competitor-section, .pattern-card, .rec-card, .summary-card, .urls-list {
-        background: #f9f9f9;
-        border-color: #ddd;
-        break-inside: avoid;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dossier de Inteligencia Publicitaria — AV Sistemas</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #12121a;
+  --bg-card: #1a1a28;
+  --bg-card-hover: #222236;
+  --accent-cyan: #00d4ff;
+  --accent-amber: #ffb800;
+  --accent-green: #00ff88;
+  --accent-red: #ff4466;
+  --accent-purple: #a855f7;
+  --text-primary: #f0f0f5;
+  --text-secondary: #8888aa;
+  --text-muted: #555570;
+  --border: #2a2a3e;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: 
+    linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  z-index: 0;
+  pointer-events: none;
+}
+.scroll-progress {
+  position: fixed; top: 0; left: 0; height: 3px;
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-amber));
+  z-index: 1000; transition: width 0.1s;
+}
+.nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  background: rgba(10,10,15,0.9); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border); z-index: 999; padding: 0 2rem;
+}
+.nav-inner {
+  max-width: 1400px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between; height: 60px;
+}
+.nav-brand {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600; font-size: 0.85rem; color: var(--accent-cyan); letter-spacing: 0.05em;
+}
+.nav-links { display: flex; gap: 1.5rem; list-style: none; }
+.nav-links a {
+  color: var(--text-secondary); text-decoration: none; font-size: 0.8rem;
+  font-weight: 500; transition: color 0.3s; letter-spacing: 0.02em;
+}
+.nav-links a:hover { color: var(--accent-cyan); }
+.container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
+.hero {
+  min-height: 100vh; display: flex; align-items: center;
+  padding-top: 60px; position: relative; overflow: hidden;
+}
+.hero::after {
+  content: ''; position: absolute; top: 20%; right: -10%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(0,212,255,0.08) 0%, transparent 70%);
+  border-radius: 50%; animation: pulse-glow 4s ease-in-out infinite;
+}
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+.hero-content { position: relative; z-index: 2; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.2);
+  border-radius: 100px; padding: 0.4rem 1rem; font-size: 0.75rem;
+  color: var(--accent-cyan); font-weight: 500; margin-bottom: 2rem;
+  animation: fadeInUp 0.6s ease;
+}
+.hero-badge::before {
+  content: ''; width: 6px; height: 6px; background: var(--accent-cyan);
+  border-radius: 50%; animation: blink 2s infinite;
+}
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+.hero h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 700;
+  line-height: 1.1; margin-bottom: 1.5rem; animation: fadeInUp 0.6s ease 0.1s both;
+}
+.hero h1 .gradient-text {
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-amber));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-subtitle {
+  font-size: 1.15rem; color: var(--text-secondary); max-width: 600px;
+  margin-bottom: 3rem; animation: fadeInUp 0.6s ease 0.2s both;
+}
+.hero-stats {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem; max-width: 700px; animation: fadeInUp 0.6s ease 0.3s both;
+}
+.hero-stat {
+  text-align: center; padding: 1.2rem; background: var(--bg-card);
+  border: 1px solid var(--border); border-radius: 12px; transition: all 0.3s;
+}
+.hero-stat:hover { border-color: var(--accent-cyan); transform: translateY(-2px); }
+.hero-stat-value {
+  font-family: 'JetBrains Mono', monospace; font-size: 1.8rem;
+  font-weight: 700; color: var(--accent-cyan);
+}
+.hero-stat-label {
+  font-size: 0.7rem; color: var(--text-secondary);
+  text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.3rem;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.section { padding: 6rem 0; }
+.section-header { margin-bottom: 4rem; }
+.section-tag {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.7rem;
+  color: var(--accent-cyan); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 0.8rem;
+}
+.section-title { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; margin-bottom: 1rem; }
+.section-subtitle { font-size: 1rem; color: var(--text-secondary); max-width: 600px; }
+.method-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+.method-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 16px; padding: 2rem; transition: all 0.3s; position: relative; overflow: hidden;
+}
+.method-card:hover { border-color: var(--accent-cyan); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+.method-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-amber)); opacity: 0; transition: opacity 0.3s;
+}
+.method-card:hover::before { opacity: 1; }
+.method-step { font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 700; color: rgba(0,212,255,0.15); margin-bottom: 1rem; }
+.method-card h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.8rem; }
+.method-card p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.7; }
+.chart-container {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 20px; padding: 2.5rem; margin-bottom: 2rem;
+}
+.bar-chart { display: flex; flex-direction: column; gap: 1rem; }
+.bar-row { display: grid; grid-template-columns: 160px 1fr 60px; align-items: center; gap: 1rem; }
+.bar-label { font-size: 0.85rem; font-weight: 500; text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bar-track { height: 32px; background: var(--bg-secondary); border-radius: 8px; overflow: hidden; }
+.bar-fill {
+  height: 100%; border-radius: 8px; transition: width 2s ease; width: 0;
+  display: flex; align-items: center; padding-left: 0.8rem;
+  font-size: 0.7rem; font-weight: 600; color: rgba(0,0,0,0.7);
+}
+.bar-days { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-secondary); text-align: right; }
+.ranking-section { overflow-x: auto; }
+.ranking-table { width: 100%; border-collapse: separate; border-spacing: 0 0.5rem; }
+.ranking-table thead th {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+  text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted);
+  padding: 1rem 1.2rem; text-align: left; border-bottom: 1px solid var(--border);
+}
+.ranking-table tbody tr { background: var(--bg-card); transition: all 0.3s; cursor: pointer; }
+.ranking-table tbody tr:hover { background: var(--bg-card-hover); transform: scale(1.005); }
+.ranking-table td { padding: 1.2rem; font-size: 0.9rem; }
+.ranking-table td:first-child { border-radius: 12px 0 0 12px; }
+.ranking-table td:last-child { border-radius: 0 12px 12px 0; }
+.rank-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; border-radius: 8px;
+  font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 0.85rem;
+}
+.rank-1 { background: linear-gradient(135deg, #ffd700, #ffb800); color: #000; }
+.rank-2 { background: linear-gradient(135deg, #c0c0c0, #a0a0a0); color: #000; }
+.rank-3 { background: linear-gradient(135deg, #cd7f32, #b87333); color: #fff; }
+.rank-default { background: var(--bg-secondary); color: var(--text-secondary); border: 1px solid var(--border); }
+.company-cell { display: flex; align-items: center; gap: 0.8rem; }
+.company-avatar {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 0.75rem; color: #fff; flex-shrink: 0;
+}
+.company-name { font-weight: 600; }
+.company-type { font-size: 0.7rem; color: var(--text-muted); }
+.format-badge { display: inline-block; padding: 0.25rem 0.6rem; border-radius: 6px; font-size: 0.7rem; font-weight: 500; }
+.format-video { background: rgba(255,68,102,0.15); color: var(--accent-red); }
+.format-image { background: rgba(168,85,247,0.15); color: var(--accent-purple); }
+.format-carousel { background: rgba(255,184,0,0.15); color: var(--accent-amber); }
+.score-bar-container { display: flex; align-items: center; gap: 0.8rem; }
+.score-bar { flex: 1; height: 8px; background: var(--bg-secondary); border-radius: 4px; overflow: hidden; min-width: 80px; }
+.score-bar-fill { height: 100%; border-radius: 4px; transition: width 1.5s ease; width: 0; }
+.score-bar-fill.high { background: linear-gradient(90deg, var(--accent-green), #00cc66); }
+.score-bar-fill.medium { background: linear-gradient(90deg, var(--accent-amber), #ff9900); }
+.score-bar-fill.low { background: linear-gradient(90deg, var(--accent-red), #cc3355); }
+.score-value { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 600; min-width: 35px; }
+.competitor-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; }
+.competitor-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 20px; overflow: hidden; transition: all 0.4s;
+}
+.competitor-card:hover { border-color: var(--accent-cyan); transform: translateY(-6px); box-shadow: 0 30px 60px rgba(0,0,0,0.4); }
+.competitor-card-header {
+  padding: 1.5rem 2rem; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.competitor-card-rank { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--text-muted); }
+.competitor-card-body { padding: 2rem; }
+.competitor-card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.3rem; }
+.competitor-card .subtitle { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+.ad-preview {
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1.2rem; margin-bottom: 1.5rem;
+}
+.ad-preview-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+  text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 0.8rem;
+}
+.ad-preview-copy {
+  font-size: 0.85rem; color: var(--text-secondary); line-height: 1.7;
+  border-left: 2px solid var(--accent-cyan); padding-left: 1rem;
+}
+.ad-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.ad-meta-item { background: var(--bg-secondary); border-radius: 10px; padding: 1rem; }
+.ad-meta-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 0.3rem; }
+.ad-meta-value { font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 600; color: var(--text-primary); }
+.ad-link {
+  display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1.5rem;
+  padding: 0.6rem 1.2rem; background: rgba(0,212,255,0.1);
+  border: 1px solid rgba(0,212,255,0.2); border-radius: 8px;
+  color: var(--accent-cyan); text-decoration: none; font-size: 0.8rem;
+  font-weight: 500; transition: all 0.3s;
+}
+.ad-link:hover { background: rgba(0,212,255,0.2); transform: translateX(4px); }
+.insights-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+.insight-panel {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 20px; padding: 2.5rem;
+}
+.insight-panel h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 2rem; display: flex; align-items: center; gap: 0.8rem; }
+.insight-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+.icon-red { background: rgba(255,68,102,0.15); }
+.icon-green { background: rgba(0,255,136,0.15); }
+.insight-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+.insight-item { display: flex; gap: 1rem; padding: 1rem; background: var(--bg-secondary); border-radius: 12px; transition: all 0.3s; }
+.insight-item:hover { background: var(--bg-card-hover); transform: translateX(4px); }
+.insight-number { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-muted); min-width: 24px; padding-top: 0.15rem; }
+.insight-text { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; }
+.insight-text strong { color: var(--text-primary); }
+.reco-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem; }
+.reco-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 20px; padding: 2rem; position: relative; overflow: hidden; transition: all 0.4s;
+}
+.reco-card:hover { border-color: var(--accent-green); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,255,136,0.1); }
+.reco-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan));
+}
+.reco-number { font-family: 'JetBrains Mono', monospace; font-size: 3rem; font-weight: 700; color: rgba(0,255,136,0.1); line-height: 1; margin-bottom: 1rem; }
+.reco-card h4 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem; }
+.reco-card .reco-type { font-size: 0.7rem; color: var(--accent-green); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
+.reco-card p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.7; }
+.reco-card .reco-hook { margin-top: 1.2rem; padding: 1rem; background: var(--bg-secondary); border-radius: 10px; border-left: 2px solid var(--accent-green); }
+.reco-card .reco-hook-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-green); margin-bottom: 0.3rem; }
+.reco-card .reco-hook-text { font-size: 0.9rem; font-weight: 500; color: var(--text-primary); font-style: italic; }
+.patterns-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+.pattern-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 16px; padding: 1.5rem; text-align: center; transition: all 0.3s;
+}
+.pattern-card:hover { border-color: var(--accent-amber); transform: translateY(-3px); }
+.pattern-value { font-family: 'JetBrains Mono', monospace; font-size: 2.5rem; font-weight: 700; margin-bottom: 0.3rem; }
+.pattern-label { font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+.pattern-detail { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem; }
+.donut-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 2rem; }
+.donut-item { text-align: center; }
+.donut-ring { width: 120px; height: 120px; margin: 0 auto 1rem; position: relative; }
+.donut-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.donut-ring circle { fill: none; stroke-width: 8; }
+.donut-ring .bg { stroke: var(--bg-secondary); }
+.donut-ring .fill { stroke-dasharray: 0 339.292; transition: stroke-dasharray 2s ease; }
+.donut-center {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; font-weight: 700;
+}
+.donut-label { font-size: 0.8rem; color: var(--text-secondary); font-weight: 500; }
+.footer { padding: 4rem 0; border-top: 1px solid var(--border); text-align: center; }
+.footer p { font-size: 0.8rem; color: var(--text-muted); }
+.footer .brand { font-family: 'JetBrains Mono', monospace; color: var(--accent-cyan); font-weight: 600; }
+.fade-in { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+@media (max-width: 768px) {
+  .insights-grid { grid-template-columns: 1fr; }
+  .hero-stats { grid-template-columns: repeat(2, 1fr); }
+  .competitor-cards { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .ad-meta { grid-template-columns: 1fr; }
+  .reco-cards { grid-template-columns: 1fr; }
+  .patterns-grid { grid-template-columns: 1fr 1fr; }
+  .bar-row { grid-template-columns: 100px 1fr 50px; }
+}
+</style>
 </head>
 <body>
-  <!-- Hero -->
-  <section class="hero">
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-brand">META ADS SPY // AV SISTEMAS</div>
+    <ul class="nav-links">
+      <li><a href="#methodology">Metodologia</a></li>
+      <li><a href="#ranking">Ranking</a></li>
+      <li><a href="#analysis">Analisis</a></li>
+      <li><a href="#patterns">Patrones</a></li>
+      <li><a href="#weaknesses">Debilidades</a></li>
+      <li><a href="#recommendations">Recomendaciones</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
     <div class="hero-content">
-      <div class="hero-badge">Dossier de Inteligencia Publicitaria</div>
-      <h1>SERVICIOS AUDIOVISUALES / EVENTOS CORPORATIVOS</h1>
-      <p class="hero-subtitle">Análisis de competencia en Meta Ad Library — España — 2026-03-22</p>
+      <div class="hero-badge">LIVE INTELLIGENCE REPORT</div>
+      <h1>Dossier de<br><span class="gradient-text">Inteligencia Publicitaria</span></h1>
+      <p class="hero-subtitle">Analisis exhaustivo de los 10 principales competidores de AV Sistemas en Meta Ads. Keywords rastreadas, anuncios diseccionados, debilidades expuestas.</p>
       <div class="hero-stats">
         <div class="hero-stat">
-          <div class="hero-stat-value">5</div>
+          <div class="hero-stat-value" data-count="10">0</div>
           <div class="hero-stat-label">Competidores</div>
         </div>
         <div class="hero-stat">
-          <div class="hero-stat-value">10</div>
-          <div class="hero-stat-label">Anuncios analizados</div>
+          <div class="hero-stat-value" data-count="8">0</div>
+          <div class="hero-stat-label">Keywords</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value" data-count="25">0</div>
+          <div class="hero-stat-label">Anuncios</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value" data-count="6">0</div>
+          <div class="hero-stat-label">Recomendaciones</div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Executive Summary -->
-  <section class="section">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label">Resumen Ejecutivo</div>
-        <h2 class="section-title">Panorama publicitario</h2>
+<!-- METHODOLOGY -->
+<section class="section" id="methodology">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-tag">// Proceso</div>
+      <h2 class="section-title">Metodologia de Busqueda</h2>
+      <p class="section-subtitle">8 keywords estrategicas rastreadas en Meta Ad Library, filtradas por Espana y anuncios activos.</p>
+    </div>
+    <div class="method-grid">
+      <div class="method-card fade-in">
+        <div class="method-step">01</div>
+        <h3>Keywords Directas</h3>
+        <p>"servicios audiovisuales", "empresa audiovisual", "equipos audiovisuales" -- Terminos que busca directamente quien necesita el servicio.</p>
       </div>
-      <div class="summary-card">
-        <p class="summary-text">El sector de servicios audiovisuales en España muestra baja saturación publicitaria en Meta Ads, con solo ~22 anuncios activos directamente relacionados. Los competidores más rentables (SytelMedia con 8 meses activo, SRFLYER con casi 1 año) apuestan por vídeo y carruseles con hooks emocionales. La mayoría de empresas del sector NO se anuncian en Meta, lo que representa una oportunidad enorme para AV Sistemas de posicionarse como líder digital con una inversión moderada.</p>
+      <div class="method-card fade-in">
+        <div class="method-step">02</div>
+        <h3>Keywords de Producto</h3>
+        <p>"alquiler pantallas LED", "alquiler sonido iluminacion" -- Productos especificos que ofrece AV Sistemas y que buscan los clientes potenciales.</p>
+      </div>
+      <div class="method-card fade-in">
+        <div class="method-step">03</div>
+        <h3>Keywords de Evento</h3>
+        <p>"eventos corporativos", "produccion tecnica eventos" -- El contexto donde se consume el servicio. Captura competidores indirectos.</p>
+      </div>
+      <div class="method-card fade-in">
+        <div class="method-step">04</div>
+        <h3>Keywords de Nicho</h3>
+        <p>"DJ bodas eventos sonido", "produccion audiovisual" -- Nichos adyacentes donde compiten por el mismo presupuesto del cliente.</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Competitors -->
-  <section class="section" style="background: var(--bg-secondary);">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label">Análisis de Competidores</div>
-        <h2 class="section-title">Top 5 competidores del sector</h2>
-      </div>
-      
-        <div class="competitor-section">
-          <div class="competitor-header">
-            <div class="competitor-rank">#1</div>
-            <div class="competitor-info">
-              <h3>SytelMedia</h3>
-              <div class="competitor-stats">
-                <span>2 anuncios encontrados</span>
-                <span>Más antiguo: 240 días</span>
-              </div>
-            </div>
-          </div>
-          <div class="ads-grid">
-            
-            <div class="ad-card">
-              <div class="ad-header">
-                <div class="ad-format">Vídeo</div>
-                <div class="ad-days">240 días activo</div>
-                <div class="ad-score score-medium">Muy Alta</div>
-              </div>
-              <div class="ad-body">
-                <div class="ad-headline">"No hay segunda oportunidad para una primera impresión"</div>
-                <p class="ad-copy">¿Tu marca se ve como una más o como LA que todos recuerdan? En un mundo lleno de contenido mediocre, destacar no es una opción... es una obligación. Somos la empresa de marketing audiovisual que convierte tu negocio en una marca imposible de ignorar. Grabamos. Editamos. Creamos ideas que impactan. Y lo hacemos con estrategia, no con suerte. Escríbenos y demos el primer paso hacia tu nueva imagen de marca. Transformamos tu presencia digital en una máquina de atracción visual.</p>
-                <div class="ad-meta">
-                  <div class="ad-cta-badge">CTA: Learn more</div>
-                  <div class="ad-platforms"><span class="platform-badge">Facebook</span><span class="platform-badge">Instagram</span></div>
-                </div>
-                <a href="https://sytelmedia.com" target="_blank" class="ad-landing-link">Ver landing page →</a>
-              </div>
-              <div class="ad-footer">
-                <span>Inicio: 2025-07-26</span>
-                <a href="https://www.facebook.com/ads/library/?id=1321958259657305" target="_blank" class="ad-library-link">Ver en Meta Ad Library →</a>
-              </div>
-            </div>
-            
-            <div class="ad-card">
-              <div class="ad-header">
-                <div class="ad-format">Vídeo</div>
-                <div class="ad-days">192 días activo</div>
-                <div class="ad-score score-high">Alta</div>
-              </div>
-              <div class="ad-body">
-                <div class="ad-headline">"¿Tu marca se ve como una más o como LA que todos recuerdan?"</div>
-                <p class="ad-copy">Si tu marca no impacta en 3 segundos, perdiste el cliente. En un mundo lleno de contenido mediocre, destacar no es una opción... es una obligación. Somos la empresa de marketing audiovisual que convierte tu negocio en una marca imposible de ignorar.</p>
-                <div class="ad-meta">
-                  <div class="ad-cta-badge">CTA: Get quote</div>
-                  <div class="ad-platforms"><span class="platform-badge">Facebook</span><span class="platform-badge">Instagram</span><span class="platform-badge">Audience Network</span></div>
-                </div>
-                <a href="https://fb.me/sytelmedia" target="_blank" class="ad-landing-link">Ver landing page →</a>
-              </div>
-              <div class="ad-footer">
-                <span>Inicio: 2025-09-12</span>
-                <a href="https://www.facebook.com/ads/library/?id=1121123423288673" target="_blank" class="ad-library-link">Ver en Meta Ad Library →</a>
-              </div>
-            </div>
-            
-          </div>
-        </div>
-        
-
-        <div class="competitor-section">
-          <div class="competitor-header">
-            <div class="competitor-rank">#2</div>
-            <div class="competitor-info">
-              <h3>TJ Light Producciones</h3>
-              <div class="competitor-stats">
-                <span>1 anuncios encontrados</span>
-                <span>Más antiguo: 4 días</span>
-              </div>
-            </div>
-          </div>
-          <div class="ads-grid">
-            
-            <div class="ad-card">
-              <div class="ad-header">
-                <div class="ad-format">Vídeo</div>
-                <div class="ad-days">4 días activo</div>
-                <div class="ad-score score-medium">Media</div>
-              </div>
-              <div class="ad-body">
-                <div class="ad-headline">"Un buen show no solo se escucha… se vive"</div>
-                <p class="ad-copy">En TJLight Producciones sabemos que un buen show no solo se escucha… se vive. Por eso trabajamos para que cada concierto, gira o evento tenga el sonido y la iluminación que realmente merece el escenario. Equipos profesionales, diseño técnico personalizado y un equipo que conoce el directo desde dentro. Producción técnica para conciertos y giras. Iluminación escénica que potencia cada momento del show. Sonido potente, limpio y perfectamente equilibrado. Soluciones técnicas para eventos corporativos. Alquiler de material profesional con asistencia técnica.</p>
-                <div class="ad-meta">
-                  <div class="ad-cta-badge">CTA: Call now</div>
-                  <div class="ad-platforms"><span class="platform-badge">Facebook</span><span class="platform-badge">Instagram</span></div>
-                </div>
-                <a href="https://www.tjlight.es" target="_blank" class="ad-landing-link">Ver landing page →</a>
-              </div>
-              <div class="ad-footer">
-                <span>Inicio: 2026-03-18</span>
-                <a href="https://www.facebook.com/ads/library/?id=2361245974376339" target="_blank" class="ad-library-link">Ver en Meta Ad Library →</a>
-              </div>
-            </div>
-            
-            <div class="ad-card">
-              <div class="ad-header">
-                <div class="ad-format">Vídeo</div>
-                <div class="ad-days">4 días activo</div>
-                <div class="ad-score score-medium">Media</div>
-              </div>
-              <div class="ad-body">
-                <div class="ad-headline">"Tú te encargas de la música. Nosotros de que todo suene y se vea como debe."</div>
-                <p class="ad-copy">Producción técnica para conciertos y giras. Iluminación escénica que potencia cada momento del show. Sonido potente, limpio y perfectamente equilibrado. Soluciones técnicas para eventos corporativos. Alquiler de material profesional con asistencia técnica.</p>
-                <div class="ad-meta">
-                  <div class="ad-cta-badge">CTA: Call now</div>
-                  <div class="ad-platforms"><span class="platform-badge">Facebook</span><span class="platform-badge">Instagram</span></div>
-                </div>
-                <a href="https://www.tjlight.es" target="_blank" class="ad-landing-link">Ver landing page →</a>
-              </div>
-              <div class="ad-footer">
-                <span>Inicio: 2026-03-18</span>
-                <a href="https://www.facebook.com/ads/library/?id=2361245974376339" target="_blank" class="ad-library-link">Ver en Meta Ad Library →</a>
-              </div>
-            </div>
-            
-          </div>
-        </div>
-        
-
-        <div class="competitor-section">
-          <div class="competitor-header">
-            <div class="competitor-rank">#3</div>
-            <div class="competitor-info">
-              <h3>Magic Music Management Espectáculos</h3>
-              <div class="competitor-stats">
-                <span>1 anuncios encontrados</span>
-                <span>Más antiguo: 131 días</span>
-              </div>
-            </div>
-          </div>
-          <div class="ads-grid">
-            
-            <div class="ad-card">
-              <div class="ad-header">
-                <div class="ad-format">Imagen (carrusel)</div>
-                <div class="ad-days">131 días activo</div>
-                <div class="ad-score score-high">Alta</div>
-              </div>
-              <div class="ad-body">
-                <div class="ad-headline">"MAGIC MUSIC MANAGEMENT"</div>
-                <p class="ad-copy">Sonido, iluminación y espectáculo profesional. Creamos experiencias únicas para conciertos, fiestas y eventos en toda España. Equipos de sonido e iluminación de alto nivel. DJs y discomóviles. Producción técnica completa. Orquestas y grupos para fiestas populares. Hacemos que cada evento sea inolvidable.</p>
-                <div class="ad-meta">
-                  <div class="ad-cta-badge">CTA: Visit Instagram profile</div>
-                  <div class="ad-platforms"><span class="platform-badge">Instagram</span></div>
-                </div>
-                <a href="https://www.magicmusicmanagement.es" target="_blank" class="ad-landing-link">Ver landing page →</a>
-              </div>
-              <div class="ad-footer">
-                <span>Inicio: 2025-11-12</span>
-                <a href="https://www.facebook.com/ads/library/?id=1738214963508728" target="_blank" class="ad-library-link">Ver en Meta Ad Library →</a>
-              </div>
-            </div>
-            
-            <div class="ad-card">
-              <div class="ad-header">
-                <div class="ad-format">Imagen</div>
-                <div class="ad-days">131 días activo</div>
-                <div class="ad-score score-medium">Media-Alta</div>
-              </div>
-              <div class="ad-body">
-                <div class="ad-headline">"Hacemos que cada evento sea inolvidable"</div>
-                <p class="ad-copy">Equipos de sonido e iluminación de alto nivel. DJs y discomóviles. Producción técnica completa. Orquestas y grupos para fiestas populares. Contacta y da vida a tu fiesta.</p>
-                <div class="ad-meta">
-                  <div class="ad-cta-badge">CTA: Visit Instagram profile</div>
-                  <div class="ad-platforms"><span class="platform-badge">Instagram</span></div>
-                </div>
-                <a href="https://www.instagram.com/magicmusicmanagement" target="_blank" class="ad-landing-link">Ver landing page →</a>
-              </div>
-              <div class="ad-footer">
-                <span>Inicio: 2025-11-12</span>
-                <a href="https://www.facebook.com/ads/library/?id=1738214963508728" target="_blank" class="ad-library-link">Ver en Meta Ad Library →</a>
-              </div>
-            </div>
-            
-          </div>
-        </div>
-        
-
-        <div class="competitor-section">
-          <div class="competitor-header">
-            <div class="competitor-rank">#4</div>
-            <div class="competitor-info">
-              <h3>EventSoundMontes</h3>
-              <div class="competitor-stats">
-                <span>1 anuncios encontrados</span>
-                <span>Más antiguo: 3 días</span>
-              </div>
-            </div>
-          </div>
-          <div class="ads-grid">
-            
-            <div class="ad-card">
-              <div class="ad-header">
-                <div class="ad-format">Imagen</div>
-                <div class="ad-days">3 días activo</div>
-                <div class="ad-score score-medium">Media-Baja</div>
-              </div>
-              <div class="ad-body">
-                <div class="ad-headline">"Producción técnica y experiencia audiovisual para eventos"</div>
-                <p class="ad-copy">En EventSoundMontes ofrecemos servicios profesionales de producción técnica, sonido e iluminación, diseñados para crear experiencias únicas y cuidar cada detalle de tu evento. Nos encargamos de la planificación técnica, logística, montaje y operación. Sistemas de sonido profesional de alta calidad. Servicio de DJ para eventos. Iluminación decorativa y efectos especiales. Alquiler de equipos y soporte técnico para DJs. Logística, transporte, montaje y desmontaje. Efectos especiales: Pistola CO2 Megatron, Cañón de confeti profesional de CO2, Chispa fría, Efectos de fuego real para espectáculos impactantes.</p>
-                <div class="ad-meta">
-                  <div class="ad-cta-badge">CTA: Visit Instagram profile</div>
-                  <div class="ad-platforms"><span class="platform-badge">Instagram</span></div>
-                </div>
-                <a href="https://www.instagram.com/eventsoundmontes" target="_blank" class="ad-landing-link">Ver landing page →</a>
-              </div>
-              <div class="ad-footer">
-                <span>Inicio: 2026-03-19</span>
-                <a href="https://www.facebook.com/ads/library/?id=916508221301430" target="_blank" class="ad-library-link">Ver en Meta Ad Library →</a>
-              </div>
-            </div>
-            
-            <div class="ad-card">
-              <div class="ad-header">
-                <div class="ad-format">Imagen</div>
-                <div class="ad-days">3 días activo</div>
-                <div class="ad-score score-low">Baja</div>
-              </div>
-              <div class="ad-body">
-                <div class="ad-headline">"Tecnología, elegancia y espectáculo para eventos inolvidables"</div>
-                <p class="ad-copy">Ideal para bodas, eventos corporativos, celebraciones privadas y producciones exclusivas. Reserva tu fecha con antelación. Contáctanos por mensaje directo para más información.</p>
-                <div class="ad-meta">
-                  <div class="ad-cta-badge">CTA: Visit Instagram profile</div>
-                  <div class="ad-platforms"><span class="platform-badge">Instagram</span></div>
-                </div>
-                <a href="https://www.instagram.com/eventsoundmontes" target="_blank" class="ad-landing-link">Ver landing page →</a>
-              </div>
-              <div class="ad-footer">
-                <span>Inicio: 2026-03-19</span>
-                <a href="https://www.facebook.com/ads/library/?id=916508221301430" target="_blank" class="ad-library-link">Ver en Meta Ad Library →</a>
-              </div>
-            </div>
-            
-          </div>
-        </div>
-        
-
-        <div class="competitor-section">
-          <div class="competitor-header">
-            <div class="competitor-rank">#5</div>
-            <div class="competitor-info">
-              <h3>SRFLYER.COM</h3>
-              <div class="competitor-stats">
-                <span>1 anuncios encontrados</span>
-                <span>Más antiguo: 362 días</span>
-              </div>
-            </div>
-          </div>
-          <div class="ads-grid">
-            
-            <div class="ad-card">
-              <div class="ad-header">
-                <div class="ad-format">Carrusel</div>
-                <div class="ad-days">362 días activo</div>
-                <div class="ad-score score-medium">Muy Alta</div>
-              </div>
-              <div class="ad-body">
-                <div class="ad-headline">"¡Haz que tu evento sea LEGENDARIO con SRFlyer!"</div>
-                <p class="ad-copy">¿Estás listo para llevar tu evento al siguiente nivel? En SRFlyer nos especializamos en crear experiencias únicas, ¡porque tu evento merece ser el más épico de todos! Lo que nos diferencia: Personalización 100% a tu estilo. Creatividad sin límites. Detalles que marcan la diferencia. ¿Quieres que tu evento sea el centro de todas las miradas?</p>
-                <div class="ad-meta">
-                  <div class="ad-cta-badge">CTA: Watch More</div>
-                  <div class="ad-platforms"><span class="platform-badge">Facebook</span><span class="platform-badge">Instagram</span></div>
-                </div>
-                <a href="https://srflyer.com" target="_blank" class="ad-landing-link">Ver landing page →</a>
-              </div>
-              <div class="ad-footer">
-                <span>Inicio: 2025-03-25</span>
-                <a href="https://www.facebook.com/ads/library/?id=1178088493859471" target="_blank" class="ad-library-link">Ver en Meta Ad Library →</a>
-              </div>
-            </div>
-            
-            <div class="ad-card">
-              <div class="ad-header">
-                <div class="ad-format">Carrusel</div>
-                <div class="ad-days">362 días activo</div>
-                <div class="ad-score score-high">Alta</div>
-              </div>
-              <div class="ad-body">
-                <div class="ad-headline">"Marco Photocall personalizable / Pulseras TYVEK / Vasos personalizables / Lanyards"</div>
-                <p class="ad-copy">Desde bodas alucinantes hasta eventos corporativos que rompen esquemas, tenemos todo lo que necesitas para hacerlo inolvidable. Personalización 100% a tu estilo. Creatividad sin límites. Detalles que marcan la diferencia.</p>
-                <div class="ad-meta">
-                  <div class="ad-cta-badge">CTA: Watch More</div>
-                  <div class="ad-platforms"><span class="platform-badge">Facebook</span><span class="platform-badge">Instagram</span></div>
-                </div>
-                <a href="https://srflyer.com" target="_blank" class="ad-landing-link">Ver landing page →</a>
-              </div>
-              <div class="ad-footer">
-                <span>Inicio: 2025-03-25</span>
-                <a href="https://www.facebook.com/ads/library/?id=1178088493859471" target="_blank" class="ad-library-link">Ver en Meta Ad Library →</a>
-              </div>
-            </div>
-            
-          </div>
-        </div>
-        
+<!-- RANKING -->
+<section class="section" id="ranking">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-tag">// Ranking</div>
+      <h2 class="section-title">Top 10 Competidores</h2>
+      <p class="section-subtitle">Ordenados por efectividad publicitaria: tiempo activo, formato, plataformas y calidad del copy.</p>
     </div>
-  </section>
-
-  <!-- Patterns -->
-  <section class="section">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label">Inteligencia</div>
-        <h2 class="section-title">Patrones detectados</h2>
-      </div>
-      
-    <div class="patterns-grid">
-      <div class="pattern-card">
-        <h4>🎯 Hooks que funcionan</h4>
-        <ol><li>No hay segunda oportunidad para una primera impresión</li><li>Si tu marca no impacta en 3 segundos, perdiste el cliente</li><li>Un buen show no solo se escucha… se vive</li><li>¡Haz que tu evento sea LEGENDARIO!</li><li>Creamos experiencias únicas</li></ol>
-      </div>
-      <div class="pattern-card">
-        <h4>📊 Formatos dominantes</h4>
-        
-        <div class="format-bar">
-          <div class="format-label">Vídeo</div>
-          <div class="format-track">
-            <div class="format-fill" style="width: 50%"></div>
-          </div>
-          <div class="format-pct">50%</div>
-        </div>
-        
-        <div class="format-bar">
-          <div class="format-label">Imagen</div>
-          <div class="format-track">
-            <div class="format-fill" style="width: 30%"></div>
-          </div>
-          <div class="format-pct">30%</div>
-        </div>
-        
-        <div class="format-bar">
-          <div class="format-label">Carrusel</div>
-          <div class="format-track">
-            <div class="format-fill" style="width: 20%"></div>
-          </div>
-          <div class="format-pct">20%</div>
-        </div>
-        
-      </div>
-      <div class="pattern-card">
-        <h4>🔘 CTAs más usados</h4>
-        <ol><li>Learn more</li><li>Visit Instagram profile</li><li>Call now</li><li>Get quote</li><li>Watch More</li></ol>
-      </div>
-      <div class="pattern-card">
-        <h4>✍️ Patrones de copy</h4>
-        <ol><li>Pregunta retórica + dolor + solución: '¿Tu marca se ve como una más? → Nosotros la hacemos imposible de ignorar'</li><li>Lista de servicios con emojis: Sonido, iluminación, DJs, producción técnica</li><li>Urgencia emocional: 'No hay segunda oportunidad', 'En 3 segundos perdiste el cliente'</li><li>Diferenciación por experiencia: 'No solo grabamos, pensamos en ventas'</li><li>Copy energético con mayúsculas: 'LEGENDARIO', 'ÉPICO', 'INOLVIDABLE'</li></ol>
-      </div>
-      <div class="pattern-card full-width">
-        <h4>⚠️ Debilidades de la competencia</h4>
-        <ul><li>Ningún competidor usa testimonios de clientes reales ni casos de éxito con métricas en sus anuncios</li><li>La mayoría dirige tráfico a Instagram en lugar de a una landing page optimizada para conversión</li><li>Ninguno muestra antes/después de sus montajes ni timelapses de instalación en los anuncios</li><li>Los copies son genéricos y no segmentan por tipo de cliente (corporativo vs. bodas vs. conciertos)</li><li>Solo SytelMedia y SRFLYER tienen anuncios de larga duración; el resto son novatos sin datos de optimización</li></ul>
+    <div class="chart-container fade-in">
+      <h3 style="font-size:1rem;margin-bottom:1.5rem;color:var(--text-secondary)">Dias con anuncios activos</h3>
+      <div class="bar-chart">
+        <div class="bar-row"><div class="bar-label">EXEL DJ BODAS</div><div class="bar-track"><div class="bar-fill" data-width="100" style="background:linear-gradient(90deg,var(--accent-cyan),var(--accent-green))">420d</div></div><div class="bar-days">420</div></div>
+        <div class="bar-row"><div class="bar-label">SRFLYER.COM</div><div class="bar-track"><div class="bar-fill" data-width="86" style="background:linear-gradient(90deg,var(--accent-cyan),var(--accent-green))">362d</div></div><div class="bar-days">362</div></div>
+        <div class="bar-row"><div class="bar-label">SytelMedia</div><div class="bar-track"><div class="bar-fill" data-width="57" style="background:linear-gradient(90deg,var(--accent-cyan),var(--accent-amber))">240d</div></div><div class="bar-days">240</div></div>
+        <div class="bar-row"><div class="bar-label">Magic Music Mgmt</div><div class="bar-track"><div class="bar-fill" data-width="31" style="background:linear-gradient(90deg,var(--accent-amber),var(--accent-amber))">131d</div></div><div class="bar-days">131</div></div>
+        <div class="bar-row"><div class="bar-label">AV Medios</div><div class="bar-track"><div class="bar-fill" data-width="13" style="background:linear-gradient(90deg,var(--accent-amber),var(--accent-red))">55d</div></div><div class="bar-days">55</div></div>
+        <div class="bar-row"><div class="bar-label">Espacio Iroko</div><div class="bar-track"><div class="bar-fill" data-width="9" style="background:linear-gradient(90deg,var(--accent-red),var(--accent-red))">37d</div></div><div class="bar-days">37</div></div>
+        <div class="bar-row"><div class="bar-label">DJ Sombra</div><div class="bar-track"><div class="bar-fill" data-width="2.4" style="background:linear-gradient(90deg,var(--accent-red),var(--accent-red))">10d</div></div><div class="bar-days">10</div></div>
+        <div class="bar-row"><div class="bar-label">TJ Light</div><div class="bar-track"><div class="bar-fill" data-width="1" style="background:linear-gradient(90deg,var(--accent-red),var(--accent-red))">4d</div></div><div class="bar-days">4</div></div>
+        <div class="bar-row"><div class="bar-label">EventSoundMontes</div><div class="bar-track"><div class="bar-fill" data-width="0.7" style="background:linear-gradient(90deg,var(--accent-red),var(--accent-red))">3d</div></div><div class="bar-days">3</div></div>
+        <div class="bar-row"><div class="bar-label">Misterdj</div><div class="bar-track"><div class="bar-fill" data-width="1" style="background:linear-gradient(90deg,var(--accent-red),var(--accent-red))">4d</div></div><div class="bar-days">4</div></div>
       </div>
     </div>
-    
+    <div class="ranking-section fade-in">
+      <table class="ranking-table">
+        <thead><tr><th>#</th><th>Empresa</th><th>Formato</th><th>Plataformas</th><th>Dias</th><th>Efectividad</th></tr></thead>
+        <tbody>
+          <tr><td><span class="rank-badge rank-1">1</span></td><td><div class="company-cell"><div class="company-avatar" style="background:linear-gradient(135deg,#ffd700,#ffb800)">EX</div><div><div class="company-name">EXEL DJ BODAS</div><div class="company-type">DJ + Iluminacion Bodas</div></div></div></td><td><span class="format-badge format-video">Video</span></td><td>FB IG</td><td style="font-family:'JetBrains Mono';font-weight:600">420</td><td><div class="score-bar-container"><div class="score-bar"><div class="score-bar-fill high" data-score="95"></div></div><span class="score-value" style="color:var(--accent-green)">95</span></div></td></tr>
+          <tr><td><span class="rank-badge rank-2">2</span></td><td><div class="company-cell"><div class="company-avatar" style="background:linear-gradient(135deg,#c0c0c0,#a0a0a0)">SR</div><div><div class="company-name">SRFLYER.COM</div><div class="company-type">Merchandising + Eventos</div></div></div></td><td><span class="format-badge format-carousel">Carrusel</span></td><td>FB IG</td><td style="font-family:'JetBrains Mono';font-weight:600">362</td><td><div class="score-bar-container"><div class="score-bar"><div class="score-bar-fill high" data-score="90"></div></div><span class="score-value" style="color:var(--accent-green)">90</span></div></td></tr>
+          <tr><td><span class="rank-badge rank-3">3</span></td><td><div class="company-cell"><div class="company-avatar" style="background:linear-gradient(135deg,#cd7f32,#b87333)">SY</div><div><div class="company-name">SytelMedia</div><div class="company-type">Marketing Audiovisual</div></div></div></td><td><span class="format-badge format-video">Video</span></td><td>FB IG AN</td><td style="font-family:'JetBrains Mono';font-weight:600">240</td><td><div class="score-bar-container"><div class="score-bar"><div class="score-bar-fill high" data-score="88"></div></div><span class="score-value" style="color:var(--accent-green)">88</span></div></td></tr>
+          <tr><td><span class="rank-badge rank-default">4</span></td><td><div class="company-cell"><div class="company-avatar">MM</div><div><div class="company-name">Magic Music Management</div><div class="company-type">Espectaculos + Sonido</div></div></div></td><td><span class="format-badge format-image">Imagen</span></td><td>IG</td><td style="font-family:'JetBrains Mono';font-weight:600">131</td><td><div class="score-bar-container"><div class="score-bar"><div class="score-bar-fill medium" data-score="72"></div></div><span class="score-value" style="color:var(--accent-amber)">72</span></div></td></tr>
+          <tr><td><span class="rank-badge rank-default">5</span></td><td><div class="company-cell"><div class="company-avatar" style="background:linear-gradient(135deg,var(--accent-green),#00cc66)">AV</div><div><div class="company-name">AV Medios</div><div class="company-type">Produccion AV Malaga</div></div></div></td><td><span class="format-badge format-video">Video</span></td><td>FB IG MSG WA AN</td><td style="font-family:'JetBrains Mono';font-weight:600">55</td><td><div class="score-bar-container"><div class="score-bar"><div class="score-bar-fill medium" data-score="78"></div></div><span class="score-value" style="color:var(--accent-amber)">78</span></div></td></tr>
+          <tr><td><span class="rank-badge rank-default">6</span></td><td><div class="company-cell"><div class="company-avatar">EI</div><div><div class="company-name">Espacio Iroko</div><div class="company-type">Espacio Eventos Madrid</div></div></div></td><td><span class="format-badge format-image">Imagen</span></td><td>FB IG MSG WA AN</td><td style="font-family:'JetBrains Mono';font-weight:600">37</td><td><div class="score-bar-container"><div class="score-bar"><div class="score-bar-fill medium" data-score="55"></div></div><span class="score-value" style="color:var(--accent-amber)">55</span></div></td></tr>
+          <tr><td><span class="rank-badge rank-default">7</span></td><td><div class="company-cell"><div class="company-avatar">DS</div><div><div class="company-name">DJ Sombra</div><div class="company-type">DJ Destination Weddings</div></div></div></td><td><span class="format-badge format-image">Imagen</span></td><td>FB IG</td><td style="font-family:'JetBrains Mono';font-weight:600">10</td><td><div class="score-bar-container"><div class="score-bar"><div class="score-bar-fill low" data-score="40"></div></div><span class="score-value" style="color:var(--accent-red)">40</span></div></td></tr>
+          <tr><td><span class="rank-badge rank-default">8</span></td><td><div class="company-cell"><div class="company-avatar">TJ</div><div><div class="company-name">TJ Light Producciones</div><div class="company-type">Produccion Tecnica</div></div></div></td><td><span class="format-badge format-video">Video</span></td><td>IG</td><td style="font-family:'JetBrains Mono';font-weight:600">4</td><td><div class="score-bar-container"><div class="score-bar"><div class="score-bar-fill low" data-score="35"></div></div><span class="score-value" style="color:var(--accent-red)">35</span></div></td></tr>
+          <tr><td><span class="rank-badge rank-default">9</span></td><td><div class="company-cell"><div class="company-avatar">ES</div><div><div class="company-name">EventSoundMontes</div><div class="company-type">Sonido + Efectos</div></div></div></td><td><span class="format-badge format-image">Imagen</span></td><td>IG</td><td style="font-family:'JetBrains Mono';font-weight:600">3</td><td><div class="score-bar-container"><div class="score-bar"><div class="score-bar-fill low" data-score="28"></div></div><span class="score-value" style="color:var(--accent-red)">28</span></div></td></tr>
+          <tr><td><span class="rank-badge rank-default">10</span></td><td><div class="company-cell"><div class="company-avatar">MJ</div><div><div class="company-name">Misterdj</div><div class="company-type">DJ Bodas Madrid</div></div></div></td><td><span class="format-badge format-video">Video</span></td><td>FB IG MSG WA AN</td><td style="font-family:'JetBrains Mono';font-weight:600">4</td><td><div class="score-bar-container"><div class="score-bar"><div class="score-bar-fill low" data-score="30"></div></div><span class="score-value" style="color:var(--accent-red)">30</span></div></td></tr>
+        </tbody>
+      </table>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Recommendations -->
-  <section class="section" style="background: var(--bg-secondary);">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label">Estrategia</div>
-        <h2 class="section-title">Recomendaciones para superar a la competencia</h2>
-      </div>
-      
-        <div class="rec-card">
-          <div class="rec-number">1</div>
-          <div class="rec-content">
-            <h4>Anuncio Timelapse: De Almacén Vacío a Evento Épico</h4>
-            <div class="rec-details">
-              <div class="rec-hook"><strong>Hook:</strong> "60 horas de montaje en 60 segundos. Esto es lo que hacemos en AV Sistemas."</div>
-              <div class="rec-format"><strong>Formato:</strong> Vídeo (Reel 15-30 seg)</div>
-              <div class="rec-cta"><strong>CTA:</strong> Solicitar presupuesto</div>
-            </div>
-            <p>Ningún competidor muestra el proceso de montaje. Un timelapse del almacén vacío transformándose en un evento completo es visualmente impactante y demuestra capacidad técnica sin necesidad de palabras. Dirigir a landing page con formulario de presupuesto.</p>
-          </div>
-        </div>
-        
-
-        <div class="rec-card">
-          <div class="rec-number">2</div>
-          <div class="rec-content">
-            <h4>Anuncio Testimonial: El Director de Eventos que Repite</h4>
-            <div class="rec-details">
-              <div class="rec-hook"><strong>Hook:</strong> "Llevamos 3 años confiando en AV Sistemas para nuestros eventos corporativos. ¿Por qué? Porque nunca fallan."</div>
-              <div class="rec-format"><strong>Formato:</strong> Vídeo (testimonial 30-45 seg)</div>
-              <div class="rec-cta"><strong>CTA:</strong> Ver casos de éxito</div>
-            </div>
-            <p>Ningún competidor usa testimoniales reales. Un vídeo corto de un cliente corporativo explicando por qué repite con AV Sistemas genera confianza inmediata. Es el formato más difícil de copiar porque requiere clientes reales satisfechos.</p>
-          </div>
-        </div>
-        
-
-        <div class="rec-card">
-          <div class="rec-number">3</div>
-          <div class="rec-content">
-            <h4>Anuncio Carrusel: Antes/Después de 5 Eventos Reales</h4>
-            <div class="rec-details">
-              <div class="rec-hook"><strong>Hook:</strong> "Sala vacía → Evento de 500 personas. Swipe para ver la transformación."</div>
-              <div class="rec-format"><strong>Formato:</strong> Carrusel (5 slides)</div>
-              <div class="rec-cta"><strong>CTA:</strong> Pedir presupuesto sin compromiso</div>
-            </div>
-            <p>El formato antes/después es uno de los más efectivos en Meta Ads. Cada slide muestra un evento diferente (corporativo, boda, concierto, feria, presentación de producto) para demostrar versatilidad. SRFLYER lleva 1 año con carrusel, lo que valida el formato.</p>
-          </div>
-        </div>
-        
+<!-- DETAILED ANALYSIS -->
+<section class="section" id="analysis">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-tag">// Analisis detallado</div>
+      <h2 class="section-title">Diseccion de Anuncios</h2>
+      <p class="section-subtitle">Copies completos, hooks, CTAs, landing pages y formatos de los competidores mas relevantes.</p>
     </div>
-  </section>
+    <div class="competitor-cards">
 
-  <!-- All URLs -->
-  <section class="section">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label">Referencias</div>
-        <h2 class="section-title">URLs de todos los anuncios analizados</h2>
+      <div class="competitor-card fade-in">
+        <div class="competitor-card-header"><div><span class="rank-badge rank-1" style="font-size:0.7rem;width:24px;height:24px">1</span></div><div class="competitor-card-rank">420 DIAS ACTIVO</div></div>
+        <div class="competitor-card-body">
+          <h3>EXEL DJ BODAS</h3>
+          <div class="subtitle">DJ + Iluminacion para Bodas -- exeleventos.com</div>
+          <div class="ad-preview"><div class="ad-preview-label">Copy del anuncio</div><div class="ad-preview-copy">Descubre nuestras tres opciones de iluminacion disenadas para crear el momento perfecto: BASIC (fiesta acogedora), PRO (iluminacion controlada por DJ), WOW (montaje espectacular con Light-Jockey). En menos de 3 minutos puedes saber cuanto costara la fiesta de tu boda. Haz clic y utiliza nuestra calculadora de presupuesto.</div></div>
+          <div class="ad-meta">
+            <div class="ad-meta-item"><div class="ad-meta-label">Hook</div><div class="ad-meta-value">3 paquetes claros</div></div>
+            <div class="ad-meta-item"><div class="ad-meta-label">CTA</div><div class="ad-meta-value">Learn more</div></div>
+            <div class="ad-meta-item"><div class="ad-meta-label">Formato</div><div class="ad-meta-value">Video</div></div>
+            <div class="ad-meta-item"><div class="ad-meta-label">Diferenciador</div><div class="ad-meta-value">Calculadora online</div></div>
+          </div>
+          <a href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=ES&q=EXEL%20DJ&search_type=keyword_unordered" target="_blank" class="ad-link">Ver en Meta Ad Library &rarr;</a>
+        </div>
       </div>
-      <div class="urls-list">
-        <ol>
-          <li><a href="https://www.facebook.com/ads/library/?id=1321958259657305" target="_blank">SytelMedia — No hay segunda oportunidad para una primera impresión</a></li>
-<li><a href="https://www.facebook.com/ads/library/?id=1121123423288673" target="_blank">SytelMedia — ¿Tu marca se ve como una más o como LA que todos recuerdan?</a></li>
-<li><a href="https://www.facebook.com/ads/library/?id=2361245974376339" target="_blank">TJ Light Producciones — Un buen show no solo se escucha… se vive</a></li>
-<li><a href="https://www.facebook.com/ads/library/?id=2361245974376339" target="_blank">TJ Light Producciones — Tú te encargas de la música. Nosotros de que todo suene y se</a></li>
-<li><a href="https://www.facebook.com/ads/library/?id=1738214963508728" target="_blank">Magic Music Management Espectáculos — MAGIC MUSIC MANAGEMENT</a></li>
-<li><a href="https://www.facebook.com/ads/library/?id=1738214963508728" target="_blank">Magic Music Management Espectáculos — Hacemos que cada evento sea inolvidable</a></li>
-<li><a href="https://www.facebook.com/ads/library/?id=916508221301430" target="_blank">EventSoundMontes — Producción técnica y experiencia audiovisual para eventos</a></li>
-<li><a href="https://www.facebook.com/ads/library/?id=916508221301430" target="_blank">EventSoundMontes — Tecnología, elegancia y espectáculo para eventos inolvidable</a></li>
-<li><a href="https://www.facebook.com/ads/library/?id=1178088493859471" target="_blank">SRFLYER.COM — ¡Haz que tu evento sea LEGENDARIO con SRFlyer!</a></li>
-<li><a href="https://www.facebook.com/ads/library/?id=1178088493859471" target="_blank">SRFLYER.COM — Marco Photocall personalizable / Pulseras TYVEK / Vasos pers</a></li>
-        </ol>
+
+      <div class="competitor-card fade-in">
+        <div class="competitor-card-header"><div><span class="rank-badge rank-2" style="font-size:0.7rem;width:24px;height:24px">2</span></div><div class="competitor-card-rank">362 DIAS ACTIVO</div></div>
+        <div class="competitor-card-body">
+          <h3>SRFLYER.COM</h3>
+          <div class="subtitle">Merchandising + Eventos -- srflyer.com</div>
+          <div class="ad-preview"><div class="ad-preview-label">Copy del anuncio</div><div class="ad-preview-copy">Haz que tu evento sea LEGENDARIO con SRFlyer! Estas listo para llevar tu evento al siguiente nivel? Nos especializamos en crear experiencias unicas. Personalizacion 100% a tu estilo. Creatividad sin limites. Detalles que marcan la diferencia.</div></div>
+          <div class="ad-meta">
+            <div class="ad-meta-item"><div class="ad-meta-label">Hook</div><div class="ad-meta-value">Emocional + FOMO</div></div>
+            <div class="ad-meta-item"><div class="ad-meta-label">CTA</div><div class="ad-meta-value">Watch More</div></div>
+            <div class="ad-meta-item"><div class="ad-meta-label">Formato</div><div class="ad-meta-value">Carrusel (11 items)</div></div>
+            <div class="ad-meta-item"><div class="ad-meta-label">Diferenciador</div><div class="ad-meta-value">Photocall + Pulseras</div></div>
+          </div>
+          <a href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=ES&q=SRFLYER&search_type=keyword_unordered" target="_blank" class="ad-link">Ver en Meta Ad Library &rarr;</a>
+        </div>
+      </div>
+
+      <div class="competitor-card fade-in">
+        <div class="competitor-card-header"><div><span class="rank-badge rank-3" style="font-size:0.7rem;width:24px;height:24px">3</span></div><div class="competitor-card-rank">240 DIAS ACTIVO</div></div>
+        <div class="competitor-card-body">
+          <h3>SytelMedia</h3>
+          <div class="subtitle">Marketing Audiovisual -- sytelmedia.com</div>
+          <div class="ad-preview"><div class="ad-preview-label">Copy del anuncio</div><div class="ad-preview-copy">No hay segunda oportunidad para una primera impresion. Tu marca se ve como una mas o como LA que todos recuerdan? En un mundo lleno de contenido mediocre, destacar no es una opcion... es una obligacion. Si tu marca no impacta en 3 segundos, perdiste el cliente.</div></div>
+          <div class="ad-meta">
+            <div class="ad-meta-item"><div class="ad-meta-label">Hook</div><div class="ad-meta-value">Urgencia + Miedo</div></div>
+            <div class="ad-meta-item"><div class="ad-meta-label">CTA</div><div class="ad-meta-value">Get quote</div></div>
+            <div class="ad-meta-item"><div class="ad-meta-label">Formato</div><div class="ad-meta-value">Video</div></div>
+            <div class="ad-meta-item"><div class="ad-meta-label">Diferenciador</div><div class="ad-meta-value">Branding premium</div></div>
+          </div>
+          <a href="https://www.facebook.com/ads/library/?id=1321958259657305" target="_blank" class="ad-link">Ver en Meta Ad Library &rarr;</a>
+        </div>
+      </div>
+
+      <div class="competitor-card fade-in">
+        <div class="competitor-card-header"><div><span class="rank-badge rank-default" style="font-size:0.7rem;width:24px;height:24px">5</span></div><div class="competitor-card-rank" style="color:var(--accent-green)">COMPETIDOR DIRECTO</div></div>
+        <div class="competitor-card-body">
+          <h3>AV Medios</h3>
+          <div class="subtitle">Produccion AV Malaga -- avmedios.com -- 30 anos de trayectoria</div>
+          <div class="ad-preview"><div class="ad-preview-label">Copy del anuncio 1</div><div class="ad-preview-copy">Llevamos a Malaga nuestra forma unica de producir eventos corporativos: innovacion, tecnologia y experiencia. Con 30 anos de trayectoria y un ano en Andalucia, redefinimos la produccion audiovisual.</div></div>
+          <div class="ad-preview" style="margin-top:1rem"><div class="ad-preview-label">Copy del anuncio 2</div><div class="ad-preview-copy">Planificar tu evento nunca fue tan facil. Desde Malaga, AV Medios acompana cada paso con respuestas rapidas, soporte cercano y un equipo que combina creatividad, precision tecnica y gestion eficiente.</div></div>
+          <div class="ad-preview" style="margin-top:1rem"><div class="ad-preview-label">Copy del anuncio 3</div><div class="ad-preview-copy">Cada pantalla cuenta. El contenido audiovisual es el eje de la experiencia.</div></div>
+          <div class="ad-meta">
+            <div class="ad-meta-item"><div class="ad-meta-label">Hook</div><div class="ad-meta-value">Autoridad (30 anos)</div></div>
+            <div class="ad-meta-item"><div class="ad-meta-label">CTA</div><div class="ad-meta-value">Learn more / Watch</div></div>
+            <div class="ad-meta-item"><div class="ad-meta-label">Formato</div><div class="ad-meta-value">3 Videos (13-48s)</div></div>
+            <div class="ad-meta-item"><div class="ad-meta-label">Plataformas</div><div class="ad-meta-value">FB IG MSG WA AN</div></div>
+          </div>
+          <a href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=ES&q=AV%20Medios&search_type=keyword_unordered" target="_blank" class="ad-link">Ver en Meta Ad Library &rarr;</a>
+        </div>
+      </div>
+
+      <div class="competitor-card fade-in">
+        <div class="competitor-card-header"><div><span class="rank-badge rank-default" style="font-size:0.7rem;width:24px;height:24px">4</span></div><div class="competitor-card-rank">131 DIAS ACTIVO</div></div>
+        <div class="competitor-card-body">
+          <h3>Magic Music Management</h3>
+          <div class="subtitle">Espectaculos + Sonido -- magicmusicmanagement.es</div>
+          <div class="ad-preview"><div class="ad-preview-label">Copy del anuncio</div><div class="ad-preview-copy">MAGIC MUSIC MANAGEMENT -- Sonido, iluminacion y espectaculo profesional. Creamos experiencias unicas para conciertos, fiestas y eventos en toda Espana. Equipos de sonido e iluminacion de alto nivel. DJs y discmoviles.</div></div>
+          <div class="ad-meta">
+            <div class="ad-meta-item"><div class="ad-meta-label">Hook</div><div class="ad-meta-value">Listado de servicios</div></div>
+            <div class="ad-meta-item"><div class="ad-meta-label">CTA</div><div class="ad-meta-value">Visit Instagram</div></div>
+            <div class="ad-meta-item"><div class="ad-meta-label">Formato</div><div class="ad-meta-value">Imagen + Carrusel</div></div>
+            <div class="ad-meta-item"><div class="ad-meta-label">Debilidad</div><div class="ad-meta-value" style="color:var(--accent-red)">Dirige a IG, no web</div></div>
+          </div>
+          <a href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=ES&q=Magic%20Music%20Management&search_type=keyword_unordered" target="_blank" class="ad-link">Ver en Meta Ad Library &rarr;</a>
+        </div>
+      </div>
+
+      <div class="competitor-card fade-in">
+        <div class="competitor-card-header"><div><span class="rank-badge rank-default" style="font-size:0.7rem;width:24px;height:24px">9</span></div><div class="competitor-card-rank">3 DIAS ACTIVO</div></div>
+        <div class="competitor-card-body">
+          <h3>EventSoundMontes</h3>
+          <div class="subtitle">Produccion tecnica + Sonido + Efectos especiales</div>
+          <div class="ad-preview"><div class="ad-preview-label">Copy del anuncio</div><div class="ad-preview-copy">Produccion tecnica y experiencia audiovisual para eventos. Servicios profesionales de produccion tecnica, sonido e iluminacion. Pistola CO2 Megatron, canon de confeti, chispa fria, efectos de fuego real. Ideal para bodas, eventos corporativos, celebraciones privadas.</div></div>
+          <div class="ad-meta">
+            <div class="ad-meta-item"><div class="ad-meta-label">Hook</div><div class="ad-meta-value">Lista de efectos</div></div>
+            <div class="ad-meta-item"><div class="ad-meta-label">CTA</div><div class="ad-meta-value">Visit Instagram</div></div>
+            <div class="ad-meta-item"><div class="ad-meta-label">Formato</div><div class="ad-meta-value">Imagen</div></div>
+            <div class="ad-meta-item"><div class="ad-meta-label">Debilidad</div><div class="ad-meta-value" style="color:var(--accent-red)">Copy generico</div></div>
+          </div>
+          <a href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=ES&q=eventsoundmontes&search_type=keyword_unordered" target="_blank" class="ad-link">Ver en Meta Ad Library &rarr;</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PATTERNS -->
+<section class="section" id="patterns">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-tag">// Patrones detectados</div>
+      <h2 class="section-title">Inteligencia de Mercado</h2>
+      <p class="section-subtitle">Datos agregados de los 10 competidores analizados.</p>
+    </div>
+    <div class="patterns-grid fade-in">
+      <div class="pattern-card"><div class="pattern-value" style="color:var(--accent-cyan)">60%</div><div class="pattern-label">Usan video</div><div class="pattern-detail">6 de 10 competidores</div></div>
+      <div class="pattern-card"><div class="pattern-value" style="color:var(--accent-amber)">70%</div><div class="pattern-label">Solo IG como destino</div><div class="pattern-detail">7 de 10 no tienen landing</div></div>
+      <div class="pattern-card"><div class="pattern-value" style="color:var(--accent-green)">0%</div><div class="pattern-label">Usan testimonios</div><div class="pattern-detail">Ninguno muestra clientes reales</div></div>
+      <div class="pattern-card"><div class="pattern-value" style="color:var(--accent-red)">0%</div><div class="pattern-label">Muestran proceso</div><div class="pattern-detail">Ninguno usa timelapses</div></div>
+      <div class="pattern-card"><div class="pattern-value" style="color:var(--accent-purple)">80%</div><div class="pattern-label">Copies genericos</div><div class="pattern-detail">8 de 10 no segmentan</div></div>
+      <div class="pattern-card"><div class="pattern-value" style="color:var(--accent-cyan)">10%</div><div class="pattern-label">Tienen calculadora</div><div class="pattern-detail">Solo EXEL DJ Bodas</div></div>
+    </div>
+    <div class="chart-container fade-in" style="margin-top:2rem">
+      <h3 style="font-size:1rem;margin-bottom:0.5rem">Distribucion de formatos y plataformas</h3>
+      <div class="donut-section">
+        <div class="donut-item"><div class="donut-ring"><svg viewBox="0 0 120 120"><circle class="bg" cx="60" cy="60" r="54"/><circle class="fill" cx="60" cy="60" r="54" stroke="var(--accent-red)" data-percent="60"/></svg><div class="donut-center" style="color:var(--accent-red)">60%</div></div><div class="donut-label">Video</div></div>
+        <div class="donut-item"><div class="donut-ring"><svg viewBox="0 0 120 120"><circle class="bg" cx="60" cy="60" r="54"/><circle class="fill" cx="60" cy="60" r="54" stroke="var(--accent-purple)" data-percent="30"/></svg><div class="donut-center" style="color:var(--accent-purple)">30%</div></div><div class="donut-label">Imagen</div></div>
+        <div class="donut-item"><div class="donut-ring"><svg viewBox="0 0 120 120"><circle class="bg" cx="60" cy="60" r="54"/><circle class="fill" cx="60" cy="60" r="54" stroke="var(--accent-amber)" data-percent="10"/></svg><div class="donut-center" style="color:var(--accent-amber)">10%</div></div><div class="donut-label">Carrusel</div></div>
+        <div class="donut-item"><div class="donut-ring"><svg viewBox="0 0 120 120"><circle class="bg" cx="60" cy="60" r="54"/><circle class="fill" cx="60" cy="60" r="54" stroke="var(--accent-green)" data-percent="40"/></svg><div class="donut-center" style="color:var(--accent-green)">40%</div></div><div class="donut-label">Multi-plataforma (5+)</div></div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <p>Generado por <span class="footer-brand">Meta Ads Spy</span> — Skill de OpenClaw</p>
-    <p style="margin-top: 4px;">2026 — Datos extraídos de Meta Ad Library</p>
-  </footer>
+<!-- WEAKNESSES -->
+<section class="section" id="weaknesses">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-tag">// Oportunidades</div>
+      <h2 class="section-title">Debilidades de la Competencia</h2>
+    </div>
+    <div class="insights-grid fade-in">
+      <div class="insight-panel">
+        <h3><span class="insight-icon icon-red">!</span> Debilidades Detectadas</h3>
+        <ul class="insight-list">
+          <li class="insight-item"><span class="insight-number">01</span><span class="insight-text"><strong>Cero testimonios de clientes reales.</strong> Ninguno de los 10 competidores muestra testimonios en video o texto de clientes satisfechos. Oportunidad enorme para AV Sistemas.</span></li>
+          <li class="insight-item"><span class="insight-number">02</span><span class="insight-text"><strong>70% dirige trafico a Instagram</strong> en vez de a una landing page optimizada. Pierden conversiones al no tener un embudo claro.</span></li>
+          <li class="insight-item"><span class="insight-number">03</span><span class="insight-text"><strong>Ninguno muestra el proceso de montaje.</strong> No hay timelapses, behind the scenes, ni contenido que demuestre la capacidad tecnica real.</span></li>
+          <li class="insight-item"><span class="insight-number">04</span><span class="insight-text"><strong>Copies genericos sin segmentacion.</strong> El 80% usa el mismo mensaje para bodas, corporativos y conciertos. No personalizan por tipo de cliente.</span></li>
+          <li class="insight-item"><span class="insight-number">05</span><span class="insight-text"><strong>Sin herramientas interactivas.</strong> Solo 1 de 10 (EXEL) tiene calculadora de presupuesto. El resto pide "contactar por DM".</span></li>
+          <li class="insight-item"><span class="insight-number">06</span><span class="insight-text"><strong>Baja inversion en retargeting.</strong> La mayoria tiene 1-2 anuncios genericos. No hay secuencias de remarketing ni contenido por etapa del funnel.</span></li>
+        </ul>
+      </div>
+      <div class="insight-panel">
+        <h3><span class="insight-icon icon-green">+</span> Ventajas de AV Sistemas</h3>
+        <ul class="insight-list">
+          <li class="insight-item"><span class="insight-number">01</span><span class="insight-text"><strong>Almacen propio con equipo real.</strong> Pueden grabar timelapses, tutoriales y behind the scenes sin coste adicional de localizacion.</span></li>
+          <li class="insight-item"><span class="insight-number">02</span><span class="insight-text"><strong>Clientes corporativos que repiten.</strong> Testimonios de empresas reales son el activo publicitario mas potente del sector.</span></li>
+          <li class="insight-item"><span class="insight-number">03</span><span class="insight-text"><strong>Equipo tecnico de alta gama.</strong> Pantallas LED, sistemas de sonido profesional, iluminacion -- contenido visual impactante garantizado.</span></li>
+          <li class="insight-item"><span class="insight-number">04</span><span class="insight-text"><strong>Consultoria estrategica activa.</strong> Con Adrian y Sergi trabajando en la estrategia, pueden ejecutar campanas que ningun competidor esta haciendo.</span></li>
+          <li class="insight-item"><span class="insight-number">05</span><span class="insight-text"><strong>Ningun competidor directo en Barcelona</strong> esta haciendo publicidad agresiva en Meta Ads. El mercado esta abierto.</span></li>
+          <li class="insight-item"><span class="insight-number">06</span><span class="insight-text"><strong>Capacidad de crear contenido viral.</strong> El sector AV tiene un potencial visual enorme que nadie esta explotando en ads.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RECOMMENDATIONS -->
+<section class="section" id="recommendations">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-tag">// Plan de accion</div>
+      <h2 class="section-title">6 Anuncios Disruptivos para AV Sistemas</h2>
+      <p class="section-subtitle">Recomendaciones basadas en las debilidades detectadas. Cada anuncio ataca un hueco que ningun competidor esta cubriendo.</p>
+    </div>
+    <div class="reco-cards">
+      <div class="reco-card fade-in">
+        <div class="reco-number">01</div>
+        <h4>Timelapse: Almacen Vacio a Evento Epico</h4>
+        <div class="reco-type">Video 15-30s | FB + IG Reels</div>
+        <p>Grabar un timelapse acelerado del montaje completo de un evento real: desde el almacen vacio hasta el resultado final con luces, sonido y pantallas LED encendidas. Ningun competidor muestra su proceso.</p>
+        <div class="reco-hook"><div class="reco-hook-label">Hook sugerido</div><div class="reco-hook-text">"De almacen vacio a evento de 500 personas en 8 horas. Asi trabajamos."</div></div>
+      </div>
+      <div class="reco-card fade-in">
+        <div class="reco-number">02</div>
+        <h4>Testimonial de Cliente Corporativo</h4>
+        <div class="reco-type">Video 30-60s | FB + IG + Audience Network</div>
+        <p>Grabar a un cliente corporativo que repite explicando por que eligio a AV Sistemas y por que sigue contratandolos. El 0% de competidores usa testimonios reales -- este anuncio sera unico en el sector.</p>
+        <div class="reco-hook"><div class="reco-hook-label">Hook sugerido</div><div class="reco-hook-text">"Llevan 3 anos haciendo nuestros eventos. No cambiariamos por nada."</div></div>
+      </div>
+      <div class="reco-card fade-in">
+        <div class="reco-number">03</div>
+        <h4>Carrusel Antes/Despues de 5 Eventos</h4>
+        <div class="reco-type">Carrusel 5 slides | FB + IG</div>
+        <p>5 fotos de salas vacias junto a las mismas salas transformadas con el montaje AV completo. Formato carrusel que genera alto engagement y es facil de producir con fotos de eventos pasados.</p>
+        <div class="reco-hook"><div class="reco-hook-label">Hook sugerido</div><div class="reco-hook-text">"Desliza para ver la transformacion: 5 eventos reales en Barcelona"</div></div>
+      </div>
+      <div class="reco-card fade-in">
+        <div class="reco-number">04</div>
+        <h4>Tutorial: "Como Elegir Sonido para tu Evento"</h4>
+        <div class="reco-type">Video educativo 45-60s | FB + IG Reels</div>
+        <p>Danny o un tecnico explicando en 60 segundos como elegir el sistema de sonido correcto segun el tipo de evento. Posiciona a AV Sistemas como expertos y genera confianza antes de la venta.</p>
+        <div class="reco-hook"><div class="reco-hook-label">Hook sugerido</div><div class="reco-hook-text">"El 90% de eventos tienen mal sonido. Te explico como evitarlo en 60 segundos."</div></div>
+      </div>
+      <div class="reco-card fade-in">
+        <div class="reco-number">05</div>
+        <h4>Retargeting: Caso de Exito con Datos</h4>
+        <div class="reco-type">Video 15s | Retargeting audiences</div>
+        <p>Para personas que ya visitaron la web o interactuaron con anuncios anteriores. Mostrar un caso de exito con datos concretos: "Evento para 300 personas, montaje en 6h, 100% satisfaccion". Cierra la venta.</p>
+        <div class="reco-hook"><div class="reco-hook-label">Hook sugerido</div><div class="reco-hook-text">"Todavia buscando produccion AV? Mira lo que hicimos la semana pasada."</div></div>
+      </div>
+      <div class="reco-card fade-in">
+        <div class="reco-number">06</div>
+        <h4>Ad Segmentado: Bodas vs Corporativo</h4>
+        <div class="reco-type">2 Videos 20s cada uno | Audiencias separadas</div>
+        <p>Crear 2 versiones del mismo anuncio: una para bodas (emocional, romantico) y otra para corporativo (profesional, datos). El 80% de competidores usa el mismo copy para todo. Segmentar = mas conversiones.</p>
+        <div class="reco-hook"><div class="reco-hook-label">Hook bodas</div><div class="reco-hook-text">"Tu boda merece sonar tan bien como se ve."</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <p>Generado por <span class="brand">Meta Ads Spy</span> -- Consultoria Adrian Lucena para AV Sistemas</p>
+    <p style="margin-top:0.5rem;font-size:0.7rem;color:var(--text-muted)">Datos extraidos de Meta Ad Library | Marzo 2026 | Espana</p>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll', () => {
+  const scrollTop = document.documentElement.scrollTop;
+  const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = (scrollTop / scrollHeight) * 100;
+  document.getElementById('scrollProgress').style.width = progress + '%';
+});
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      entry.target.querySelectorAll('.score-bar-fill').forEach(bar => {
+        const score = bar.dataset.score;
+        setTimeout(() => { bar.style.width = score + '%'; }, 300);
+      });
+      entry.target.querySelectorAll('.bar-fill').forEach(bar => {
+        const width = bar.dataset.width;
+        setTimeout(() => { bar.style.width = width + '%'; }, 300);
+      });
+      entry.target.querySelectorAll('.donut-ring .fill').forEach(circle => {
+        const percent = circle.dataset.percent;
+        const circumference = 2 * Math.PI * 54;
+        const dashArray = (percent / 100) * circumference;
+        setTimeout(() => { circle.style.strokeDasharray = dashArray + ' ' + circumference; }, 500);
+      });
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in, .chart-container, .ranking-section').forEach(el => observer.observe(el));
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('[data-count]').forEach(counter => {
+        const target = parseInt(counter.dataset.count);
+        let current = 0;
+        const increment = target / 40;
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) { counter.textContent = target; clearInterval(timer); }
+          else { counter.textContent = Math.floor(current); }
+        }, 40);
+      });
+      counterObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.hero-stats').forEach(el => counterObserver.observe(el));
+</script>
 </body>
 </html>
